@@ -1,13 +1,12 @@
 package lv.velotakas.app.service;
 
-import lv.velotakas.app.dto.request.AuthenticationRequest;
-import lv.velotakas.app.dto.request.RegisterRequest;
+import lv.velotakas.app.dto.request.user.AuthenticationRequest;
+import lv.velotakas.app.dto.request.user.RegisterRequest;
+import lv.velotakas.app.dto.request.user.UpdateUserRequest;
 import lv.velotakas.app.dto.response.AuthenticationResponse;
 import lv.velotakas.app.dto.response.UserDAO;
-import lv.velotakas.app.models.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
 
@@ -16,16 +15,14 @@ public interface UserService {
     AuthenticationResponse authenticate(AuthenticationRequest request);
 
     Boolean isTokenValid(String token);
-    Optional<List<UserDAO>> findAllUsers();
+    List<UserDAO> findAllUsers();
 
     boolean userExistsById(Integer id);
 
     UserDAO findUserById(Integer id);
+    boolean doesUserExistByEmail(String email);
 
-    boolean doesUserExist(RegisterRequest request);
-    boolean doesUserExist(UserDAO userDAO);
-
-    void updateUser(UserDAO userDAO);
+    void updateUser(UpdateUserRequest updateUserRequest, Integer id);
 
     void deleteUserById(Integer id);
 
