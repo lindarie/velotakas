@@ -34,3 +34,9 @@ build/
 
 ### Additional ignores ###
 .DS_Store
+
+### Angular ###
+src/frontend/node_modules/
+src/frontend/.vscode
+src/frontend/.angular
+/src/main/resources/static/
