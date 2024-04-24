@@ -1,16 +1,27 @@
 package lv.velotakas.app.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.sql.Date;
+import lv.velotakas.app.models.enums.Role;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "\"User\"")
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue
     private Integer id;
@@ -22,7 +33,7 @@ public class User {
     private String surname;
 
     @Column(nullable = false)
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @Column(nullable = false)
     private String encryptedPassword;
@@ -34,7 +45,7 @@ public class User {
     private String description;
 
     @Column(nullable = false, length = 20)
-    private String role;
+    private Role role;
 
     @Column(nullable = false)
     private Boolean twoFactorAuth;
@@ -74,4 +85,39 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<MapObjectRating> mapObjectRatings;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return encryptedPassword;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
