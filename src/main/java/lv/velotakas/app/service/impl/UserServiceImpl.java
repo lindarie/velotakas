@@ -92,6 +92,7 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
     @Override
+    @Transactional(readOnly = true)
     public boolean userExistsById(Integer id) {
         return repository.existsById(id);
     }
@@ -104,6 +105,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean doesUserExistByEmail(String email) {
         return repository.existsByEmail(email);
     }

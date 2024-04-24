@@ -18,14 +18,6 @@ public interface UserMapper {
     @Mapping(target="birthDate", source = "birthDate", dateFormat = "dd-MM-yyyy")
     UserDAO userToUserDAO(User user);
 
-    @Mapping(target="id", source = "id")
-    @Mapping(target="name", source = "name")
-    @Mapping(target="surname", source = "surname")
-    @Mapping(target="email", source = "email")
-    @Mapping(target="description", source = "description")
-    @Mapping(target="birthDate", source = "birthDate", dateFormat = "dd-MM-yyyy")
-    User userDAOToUser(UserDAO userDAO);
-
     @Mapping(target = "name", source = "name")
     @Mapping(target = "surname", source = "surname")
     @Mapping(target = "email", source = "email")

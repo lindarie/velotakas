@@ -114,7 +114,7 @@ public class UserController {
 
             return ResponseEntity.notFound().build();
         }
-        if (!service.doesUserExistByEmail(updateRequest.getEmail()) ){
+        if (updateRequest.isEmailChange() && !service.doesUserExistByEmail(updateRequest.getEmail()) ){
             log.info("User controller: Taken email " + updateRequest.getEmail());
             return ResponseEntity.badRequest().build();
         }
