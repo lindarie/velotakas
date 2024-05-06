@@ -7,6 +7,7 @@ import java.sql.Time;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Advertisement {
     @Id
