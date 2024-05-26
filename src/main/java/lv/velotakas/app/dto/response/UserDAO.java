@@ -15,4 +15,5 @@ public class UserDAO {
     private String birthDate;
     private String email;
     private String description;
+    private String filePath;
 }

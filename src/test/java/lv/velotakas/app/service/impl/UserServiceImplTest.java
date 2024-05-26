@@ -57,12 +57,13 @@ class UserServiceImplTest {
 
     @Test
     void testRegister() {
-        RegisterRequest registerRequest = new RegisterRequest("Ralfs", "Laksa", null, "description", "email", "password");
+        RegisterRequest registerRequest = new RegisterRequest("Ralfs", "Laksa", null, "description", "email", "password", "filePath");
         User user = new User();
         user.setEmail(registerRequest.getEmail());
         user.setName(registerRequest.getName());
         user.setSurname(registerRequest.getSurname());
         user.setEncryptedPassword("encodedPassword");
+        user.setFilePath(registerRequest.getFilePath());
         user.setRole(Role.AUTHENTICATED);
         user.setTwoFactorAuth(false);
 

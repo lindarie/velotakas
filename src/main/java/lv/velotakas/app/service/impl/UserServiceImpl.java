@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserService {
                 .description(request.getDescription())
                 .role(Role.AUTHENTICATED)
                 .twoFactorAuth(false)
+                .filePath(request.getFilePath())
                 .build();
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);
