@@ -45,8 +45,8 @@ public class UserControllerTest {
 
     @Test
     public void testRegisterUser() throws Exception {
-        RegisterRequest registerRequest = new RegisterRequest("John", "Doe", LocalDate.now(), "Description", "john@example.com", "password");
-        AuthenticationResponse expectedResponse = new AuthenticationResponse("sampleToken");
+        RegisterRequest registerRequest = new RegisterRequest("John", "Doe", LocalDate.now(), "Description", "john@example.com", "password", "filePath");
+        AuthenticationResponse expectedResponse = new AuthenticationResponse("sampleToken", "john@example.com");
 
         when(userService.register(registerRequest)).thenReturn(expectedResponse);
 
@@ -60,7 +60,7 @@ public class UserControllerTest {
     @Test
     public void testAuthenticateUser() throws Exception {
         AuthenticationRequest authenticationRequest = new AuthenticationRequest("john@example.com", "password");
-        AuthenticationResponse expectedResponse = new AuthenticationResponse("sampleToken");
+        AuthenticationResponse expectedResponse = new AuthenticationResponse("sampleToken", "john@example.com");
 
         when(userService.authenticate(authenticationRequest)).thenReturn(expectedResponse);
 
@@ -74,8 +74,8 @@ public class UserControllerTest {
     @Test
     public void testGetAllUsers() throws Exception {
         List<UserDAO> userList = Arrays.asList(
-                new UserDAO(1, "John", "Doe", "1990-01-01", "john@example.com", "Description"),
-                new UserDAO(2, "Jane", "Doe", "1992-03-15", "jane@example.com", "Description")
+                new UserDAO(1, "John", "Doe", "1990-01-01", "john@example.com", "Description", "filePath"),
+                new UserDAO(2, "Jane", "Doe", "1992-03-15", "jane@example.com", "Description", "filePath")
         );
 
         when(userService.findAllUsers()).thenReturn(userList);
@@ -89,7 +89,7 @@ public class UserControllerTest {
     @Test
     public void testGetUserById() throws Exception {
         int userId = 1;
-        UserDAO userDAO = new UserDAO(userId, "John", "Doe", "1990-01-01", "john@example.com", "Description");
+        UserDAO userDAO = new UserDAO(userId, "John", "Doe", "1990-01-01", "john@example.com", "Description", "filePath");
 
         when(userService.userExistsById(userId)).thenReturn(true);
         when(userService.findUserById(userId)).thenReturn(userDAO);
@@ -103,7 +103,7 @@ public class UserControllerTest {
     @Test
     public void testEditUser_NotFound() throws Exception {
         int userId = 1;
-        UpdateUserRequest updateUserRequest = new UpdateUserRequest("John", "Doe", LocalDate.of(1990, 1, 1), "Description", "john@example.com", "password", true);
+        UpdateUserRequest updateUserRequest = new UpdateUserRequest("John", "Doe", LocalDate.of(1990, 1, 1), "Description", "john@example.com", "password", true, "filePath");
 
         mockMvc.perform(put("/api/user/edit/{id}", userId)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -115,7 +115,7 @@ public class UserControllerTest {
     @Test
     public void testEditUser_BadRequest() throws Exception {
         int userId = 1;
-        UpdateUserRequest updateUserRequest = new UpdateUserRequest("John", "Doe", LocalDate.of(1990, 1, 1), "Description", "john@example.com", "password", true);
+        UpdateUserRequest updateUserRequest = new UpdateUserRequest("John", "Doe", LocalDate.of(1990, 1, 1), "Description", "john@example.com", "password", true, "filePath");
         when(userService.userExistsById(1)).thenReturn(true);
         mockMvc.perform(put("/api/user/edit/{id}", userId)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -127,7 +127,7 @@ public class UserControllerTest {
     @Test
     public void testEditUser_Successful() throws Exception {
         int userId = 1;
-        UpdateUserRequest updateUserRequest = new UpdateUserRequest("John", "Doe", LocalDate.of(1990, 1, 1), "Description", "john@example.com", "password", false);
+        UpdateUserRequest updateUserRequest = new UpdateUserRequest("John", "Doe", LocalDate.of(1990, 1, 1), "Description", "john@example.com", "password", false, "filePath");
         when(userService.userExistsById(1)).thenReturn(true);
         mockMvc.perform(put("/api/user/edit/{id}", userId)
                         .contentType(MediaType.APPLICATION_JSON)

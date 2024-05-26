@@ -41,6 +41,9 @@ public class User implements UserDetails {
     @Column(nullable = false, length = 30)
     private String email;
 
+    @Column(length = 1000)
+    private String filePath;
+
     @Column(length = 500)
     private String description;
 

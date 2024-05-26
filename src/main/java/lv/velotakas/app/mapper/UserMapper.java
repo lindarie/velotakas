@@ -16,6 +16,7 @@ public interface UserMapper {
     @Mapping(target="email", source = "email")
     @Mapping(target="description", source = "description")
     @Mapping(target="birthDate", source = "birthDate", dateFormat = "dd-MM-yyyy")
+    @Mapping(target="filePath", source = "filePath")
     UserDAO userToUserDAO(User user);
 
     @Mapping(target = "name", source = "name")

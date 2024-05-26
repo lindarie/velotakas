@@ -49,10 +49,12 @@ public class UserServiceImpl implements UserService {
                 .description(request.getDescription())
                 .role(Role.AUTHENTICATED)
                 .twoFactorAuth(false)
+                .filePath(request.getFilePath())
                 .build();
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
+                .user(user.getEmail())
                 .token(jwtToken)
                 .build();
     }
@@ -72,6 +74,7 @@ public class UserServiceImpl implements UserService {
         var jwtToken = jwtService.generateToken(user);
         log.info("User Service: JWT token " + jwtToken);
         return AuthenticationResponse.builder()
+                .user(user.getEmail())
                 .token(jwtToken)
                 .build();
     }
