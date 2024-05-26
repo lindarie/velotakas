@@ -1,0 +1,9 @@
+<mat-grid-list cols="3" rowHeight="15rem">
+  <mat-grid-tile *ngFor="let category of categories" [routerLink]="['/sludinajumi', category.url]">
+    <div class="category-text" >
+      <a >{{ category.value }}</a>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<button mat-raised-button color="primary" routerLink="/sludinajumi/jauns">Izvietot sludinājumu</button>

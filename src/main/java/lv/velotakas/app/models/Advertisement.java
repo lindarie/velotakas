@@ -3,7 +3,7 @@ package lv.velotakas.app.models;
 import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
-import java.sql.Time;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -11,7 +11,7 @@ import java.sql.Time;
 @Entity
 public class Advertisement {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false, length = 300)
@@ -24,7 +24,10 @@ public class Advertisement {
     private BigDecimal price;
 
     @Column(nullable = false)
-    private Time timeLimit;
+    private LocalDateTime timeLimit;
+
+    @Column(length = 1000)
+    private String filePath;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

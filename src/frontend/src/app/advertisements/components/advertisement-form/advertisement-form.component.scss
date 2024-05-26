@@ -1,0 +1,52 @@
+.advertisement-form {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.button-group {
+  margin-bottom: 15px;
+  margin-top: 8px;
+
+  button {
+    margin-right: 10px;
+    float: right;
+  }
+}
+
+mat-form-field {
+  padding: 8px 0;
+}
+
+mat-card-title {
+  padding: 10px 0;
+}
+
+@media (max-width: 600px) {
+  .advertisement-form,
+  .form-card {
+    min-width: 100%;
+  }
+
+  .button-group button {
+    margin-right: 0;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .example-full-width {
+    width: 100%;
+  }
+}

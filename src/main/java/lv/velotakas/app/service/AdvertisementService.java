@@ -1,9 +1,7 @@
 package lv.velotakas.app.service;
 
-import lv.velotakas.app.dto.request.advertisement.CreateAdvertisement;
-import lv.velotakas.app.models.Advertisement;
-import org.springframework.http.ResponseEntity;
+import lv.velotakas.app.dto.request.advertisement.AdvertisementDTO;
 
 public interface AdvertisementService {
-    ResponseEntity<Advertisement> saveAdvertisement(CreateAdvertisement createAdvertisement);
+    AdvertisementDTO createAdvertisement(AdvertisementDTO advertisementDTO);
 }
