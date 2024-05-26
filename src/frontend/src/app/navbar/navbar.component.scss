@@ -4,8 +4,12 @@ body {
 }
 
 nav {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
   background-color: #333;
   padding: 10px;
+  align-items: center;
 
   ul {
     list-style-type: none;
@@ -29,6 +33,18 @@ nav {
           color: #ddd;
         }
       }
+    }
+  }
+  .log-out {
+    padding: 5px 10px;
+    background-color: #2c5c27;
+
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #ddd;
     }
   }
 }
