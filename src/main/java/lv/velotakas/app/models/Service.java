@@ -17,7 +17,7 @@ public class Service {
     @Column(nullable = false, length = 20)
     private String name;
 
-    @Column(nullable = false)
+    @Column
     private Point location;
 
     @Column(nullable = false, length = 300)
@@ -26,6 +26,9 @@ public class Service {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @Column(length = 1000)
+    private String filePath;
 
     @OneToMany(mappedBy = "service")
     private Set<ServiceRating> serviceRatings;
