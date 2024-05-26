@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService {
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
+                .user(user.getEmail())
                 .token(jwtToken)
                 .build();
     }
@@ -72,6 +73,7 @@ public class UserServiceImpl implements UserService {
         var jwtToken = jwtService.generateToken(user);
         log.info("User Service: JWT token " + jwtToken);
         return AuthenticationResponse.builder()
+                .user(user.getEmail())
                 .token(jwtToken)
                 .build();
     }

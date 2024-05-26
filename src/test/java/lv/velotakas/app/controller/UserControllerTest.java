@@ -46,7 +46,7 @@ public class UserControllerTest {
     @Test
     public void testRegisterUser() throws Exception {
         RegisterRequest registerRequest = new RegisterRequest("John", "Doe", LocalDate.now(), "Description", "john@example.com", "password");
-        AuthenticationResponse expectedResponse = new AuthenticationResponse("sampleToken");
+        AuthenticationResponse expectedResponse = new AuthenticationResponse("sampleToken", "john@example.com");
 
         when(userService.register(registerRequest)).thenReturn(expectedResponse);
 
@@ -60,7 +60,7 @@ public class UserControllerTest {
     @Test
     public void testAuthenticateUser() throws Exception {
         AuthenticationRequest authenticationRequest = new AuthenticationRequest("john@example.com", "password");
-        AuthenticationResponse expectedResponse = new AuthenticationResponse("sampleToken");
+        AuthenticationResponse expectedResponse = new AuthenticationResponse("sampleToken", "john@example.com");
 
         when(userService.authenticate(authenticationRequest)).thenReturn(expectedResponse);
 
