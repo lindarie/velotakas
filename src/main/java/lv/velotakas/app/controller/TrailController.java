@@ -18,7 +18,7 @@ public class TrailController {
 
     public TrailController(TrailService trailService) { this.trailService = trailService; }
 
-    @PostMapping
+    @PostMapping("/createRoute")
     @Operation(summary = "Create a trail")
     public ResponseEntity<TrailDTO> createTrail(@RequestBody @Valid TrailDTO trailDTO) {
         return ResponseEntity.ok(trailService.createTrail(trailDTO));
