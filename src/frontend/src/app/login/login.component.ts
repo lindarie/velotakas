@@ -22,8 +22,9 @@ login() {
     .subscribe(
       (response) => {
         // Save token and user in local storage
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('user', response.user);
+        console.log('User logged in successfully', response);
+
+        localStorage.setItem('user', JSON.stringify(response));
 
         this.router.navigate(['/sludinajumi']);
       },
