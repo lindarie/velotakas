@@ -10,7 +10,8 @@ import {MatInputModule} from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import {MatGridListModule} from "@angular/material/grid-list";
 import { MaterialFileInputModule } from 'ngx-custom-material-file-input';
-
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -26,7 +27,9 @@ import { MaterialFileInputModule } from 'ngx-custom-material-file-input';
     MatInputModule,
     MatCardModule,
     MatGridListModule,
-    MaterialFileInputModule
+    MaterialFileInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     MatToolbarModule,
@@ -38,8 +41,9 @@ import { MaterialFileInputModule } from 'ngx-custom-material-file-input';
     MatInputModule,
     MatCardModule,
     MatGridListModule,
-    MaterialFileInputModule
-
+    MaterialFileInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class MaterialModule { }

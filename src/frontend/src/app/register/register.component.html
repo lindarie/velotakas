@@ -1,0 +1,51 @@
+<mat-card class="form-card">
+  <mat-card-header>
+    <mat-card-title>Register a new user</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="register-form" [formGroup]="registerForm" (ngSubmit)="register()">
+
+      <!-- Name -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" formControlName="name" required>
+      </mat-form-field>
+
+      <!-- Surname -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Surname</mat-label>
+        <input matInput type="text" formControlName="surname" required>
+      </mat-form-field>
+
+      <!-- Date of Birth -->
+<mat-form-field class="example-full-width">
+  <mat-label>Date of Birth</mat-label>
+  <input matInput [matDatepicker]="dp" (dateChange)="onDateChange($event)" formControlName="dateOfBirth">
+  <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+  <mat-datepicker #dp></mat-datepicker>
+</mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" required>
+      </mat-form-field>
+
+      <!-- Description -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput type="text" formControlName="description" required></textarea>
+      </mat-form-field>
+
+      <!-- Password -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" required>
+      </mat-form-field>
+
+      <div class="button-group">
+        <button mat-raised-button color="primary" type="submit">Register</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
