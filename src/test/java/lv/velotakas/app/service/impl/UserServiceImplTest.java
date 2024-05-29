@@ -8,6 +8,7 @@ import lv.velotakas.app.dto.response.UserDAO;
 import lv.velotakas.app.mapper.UserMapper;
 import lv.velotakas.app.models.User;
 import lv.velotakas.app.models.enums.Role;
+import lv.velotakas.app.repositories.ServiceRepository;
 import lv.velotakas.app.repositories.UserRepository;
 import lv.velotakas.app.service.JwtService;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,6 +38,8 @@ class UserServiceImplTest {
 
     @Mock
     private UserDetailsService userDetailsService;
+    @Mock
+    private ServiceRepository serviceRepository;
 
     @Mock
     private AuthenticationManager authenticationManager;
@@ -176,6 +179,7 @@ class UserServiceImplTest {
 
         userService.deleteUserById(userId);
 
+        verify(serviceRepository, times(1)).deleteAllByUserId(userId);
         verify(userRepository, times(1)).deleteById(userId);
     }
 }

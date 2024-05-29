@@ -62,7 +62,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private Set<Advertisement> advertisements;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Service> services;
 
     @OneToMany(mappedBy = "user")

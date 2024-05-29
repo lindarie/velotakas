@@ -10,6 +10,7 @@ import lv.velotakas.app.dto.response.UserDAO;
 import lv.velotakas.app.mapper.UserMapper;
 import lv.velotakas.app.models.User;
 import lv.velotakas.app.models.enums.Role;
+import lv.velotakas.app.repositories.ServiceRepository;
 import lv.velotakas.app.repositories.UserRepository;
 import lv.velotakas.app.service.JwtService;
 import lv.velotakas.app.service.UserService;
@@ -31,6 +32,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final UserMapper mapper = Mappers.getMapper( UserMapper.class );
     private final UserRepository repository;
+    private final ServiceRepository serviceRepository;
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
@@ -123,7 +125,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void deleteUserById(Integer id) {
-    repository.deleteById(id);
+        serviceRepository.deleteAllByUserId(id);
+        repository.deleteById(id);
     }
 
 }
