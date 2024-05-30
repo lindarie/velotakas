@@ -12,5 +12,7 @@ public interface ObjectService {
 
     boolean objectExistsById(Integer id);
 
+    ObjectDTO getObjectById(Integer id);
+
 
 }

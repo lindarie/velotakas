@@ -27,6 +27,16 @@ public class ObjectController {
 
     }
 
+    @GetMapping("/{id}")
+    @Operation(summary = "Get information about an object")
+    public ResponseEntity<ObjectDTO> getObject(@PathVariable Integer id){
+        if(objectService.objectExistsById(id)){
+            return ResponseEntity.ok(objectService.getObjectById(id));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+
     @PutMapping("/edit/{id}")
     @Operation(summary = "Update an object")
     public ResponseEntity<ObjectDTO> editObject(@RequestBody UpdateObjectRequest updateRequest, @PathVariable Integer id) {

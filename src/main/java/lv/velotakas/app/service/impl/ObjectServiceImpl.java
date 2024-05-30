@@ -39,6 +39,16 @@ public class ObjectServiceImpl implements ObjectService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public ObjectDTO getObjectById(Integer id){
+
+    MapObject object = objectRepository.findById(id).orElseThrow();
+    return objectMapper.toDTO(object);
+
+
+    }
+
+    @Override
     @Transactional
     public void updateObject(UpdateObjectRequest updateRequest, Integer id){
         MapObject object = objectRepository.findById(id).orElseThrow();
