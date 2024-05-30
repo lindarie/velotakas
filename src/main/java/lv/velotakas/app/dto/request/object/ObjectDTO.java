@@ -7,6 +7,7 @@ import lv.velotakas.app.models.TrailObject;
 import lv.velotakas.app.models.User;
 
 
+
 import java.awt.*;
 import java.util.Set;
 @Data
