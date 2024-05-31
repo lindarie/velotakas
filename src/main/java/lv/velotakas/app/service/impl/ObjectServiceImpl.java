@@ -43,9 +43,7 @@ public class ObjectServiceImpl implements ObjectService {
     public ObjectDTO getObjectById(Integer id){
 
     MapObject object = objectRepository.findById(id).orElseThrow();
-    return objectMapper.toDTO(object);
-
-
+        return objectMapper.toDTO(object);
     }
 
     @Override
@@ -53,8 +51,6 @@ public class ObjectServiceImpl implements ObjectService {
     public void updateObject(UpdateObjectRequest updateRequest, Integer id){
         MapObject object = objectRepository.findById(id).orElseThrow();
         objectMapper.toUpdateRequest(updateRequest, object);
-//        objectRepository.save(object);
-//        return objectMapper.toDTO(object);
     }
 
     @Override
