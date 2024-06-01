@@ -29,7 +29,9 @@ public class TrailServiceImpl implements TrailService {
     private final TrailRepository trailRepository;
     private final TrailMapper trailMapper;
     private final UserRepository userRepository;
+
     private final TrailObjectRepository trailObjectRepository;
+
     private final MapObjectRepository objectRepository;
 
     public TrailDTO createTrail(TrailDTO trailDTO){
@@ -48,14 +50,14 @@ public class TrailServiceImpl implements TrailService {
 
     @Override
     @Transactional(readOnly = true)
-    public TrailDTO getTrailById(Integer id) {
+    public TrailDTO getTrailById(Integer id){
         Trail trail = trailRepository.findById(id).orElseThrow();
         return trailMapper.toDTO(trail);
     }
 
     @Override
     @Transactional
-    public void updateTrail(UpdateTrailRequest updateTrailRequest, Integer id) {
+    public void updateTrail(UpdateTrailRequest updateTrailRequest, Integer id){
         Trail trail = trailRepository.findById(id).orElseThrow();
         trailMapper.toUpdateRequest(updateTrailRequest, trail);
     }
@@ -66,7 +68,7 @@ public class TrailServiceImpl implements TrailService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<TrailDTO> findAllTrails() {
+    public List<TrailDTO> findAllTrails(){
         return trailRepository.findAll().stream().map(trailMapper::toDTO).collect(Collectors.toList());
     }
 
@@ -78,10 +80,9 @@ public class TrailServiceImpl implements TrailService {
 
     @Override
     @Transactional
-    public TrailObjectDTO addObject(Integer objectId, Integer trailId) {
+    public TrailObjectDTO addObject(Integer objectId, Integer trailId){
         Trail trail = trailRepository.findById(trailId).orElseThrow();
         MapObject object = objectRepository.findById(objectId).orElseThrow();
-
         TrailObject trailObject = new TrailObject();
 
         TrailObjectId trailObjectId = new TrailObjectId(trailId, objectId);
