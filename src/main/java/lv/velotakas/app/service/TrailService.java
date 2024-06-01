@@ -17,4 +17,6 @@ public interface TrailService {
     void deleteTrailById(Integer id);
 
     List<TrailDTO> findAllTrails();
+
+    List<TrailDTO> getTrailsBySurface(String surface);
 }

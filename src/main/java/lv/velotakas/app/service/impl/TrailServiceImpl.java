@@ -65,4 +65,9 @@ public class TrailServiceImpl implements TrailService {
         return trailRepository.findAll().stream().map(trailMapper::toDTO).collect(Collectors.toList());
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<TrailDTO> getTrailsBySurface(String surface) {
+        return trailRepository.findBySurface(surface).stream().map(trailMapper::toDTO).collect(Collectors.toList());
+    }
 }

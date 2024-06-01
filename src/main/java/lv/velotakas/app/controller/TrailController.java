@@ -45,7 +45,7 @@ public class TrailController {
 
     @PutMapping("/edit/{id}")
     @Operation(summary = "Update the trail")
-    public ResponseEntity<ObjectDTO> editObject(@RequestBody UpdateTrailRequest updateTrailRequest, @PathVariable Integer id) {
+    public ResponseEntity<ObjectDTO> updateTrail(@RequestBody UpdateTrailRequest updateTrailRequest, @PathVariable Integer id) {
         if(trailService.trailExistsById(id)){
             trailService.updateTrail(updateTrailRequest, id);
             return ResponseEntity.ok().build();
@@ -61,5 +61,13 @@ public class TrailController {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/category/{surface}")
+    @Operation(summary = "Get trails by surface")
+    public ResponseEntity<List<TrailDTO>> findTrailsBySurface(@PathVariable String surface) {
+        if (surface == null || surface.isEmpty()) return ResponseEntity.notFound().build();
+        List<TrailDTO> trails = trailService.getTrailsBySurface(surface);
+        return ResponseEntity.ok(trails);
     }
 }
