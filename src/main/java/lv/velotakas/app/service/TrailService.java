@@ -1,6 +1,7 @@
 package lv.velotakas.app.service;
 
 import lv.velotakas.app.dto.request.trail.TrailDTO;
+import lv.velotakas.app.dto.request.trail.TrailObjectDTO;
 import lv.velotakas.app.dto.request.trail.UpdateTrailRequest;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface TrailService {
     List<TrailDTO> findAllTrails();
 
     List<TrailDTO> getTrailsBySurface(String surface);
+
+    TrailObjectDTO addObject(Integer ObjectId, Integer TrailId);
 }

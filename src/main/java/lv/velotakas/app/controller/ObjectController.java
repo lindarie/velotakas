@@ -18,14 +18,17 @@ public class ObjectController {
 
     public ObjectController(ObjectService objectService) { this.objectService = objectService; }
 
-    @PostMapping("/createObject")
-    @Operation(summary = "Create an object for trail")
-
-    public ResponseEntity<ObjectDTO> createObject(@RequestBody @Valid ObjectDTO objectDTO) {
-
-        return ResponseEntity.ok(objectService.createObject(objectDTO));
-
-    }
+//    @PostMapping("/createObject")
+//    @Operation(summary = "Create an object for trail")
+//
+//    public ResponseEntity<ObjectDTO> createObject(@RequestBody @Valid ObjectDTO objectDTO, Integer trailId) {
+//        ObjectDTO object = objectService.createObject(objectDTO, trailId);
+//        Integer testId = object.getId();
+////        System.out.println(testId);
+////        return testId;
+//        return ResponseEntity.ok().build();
+//
+//    }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get information about an object")

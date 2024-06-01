@@ -4,7 +4,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lv.velotakas.app.dto.request.object.ObjectDTO;
 import lv.velotakas.app.dto.request.trail.TrailDTO;
+import lv.velotakas.app.dto.request.trail.TrailObjectDTO;
 import lv.velotakas.app.dto.request.trail.UpdateTrailRequest;
+import lv.velotakas.app.service.ObjectService;
 import lv.velotakas.app.service.TrailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,12 @@ public class TrailController {
     @Autowired
     private final TrailService trailService;
 
+    @Autowired
+    ObjectService objectService;
+
     public TrailController(TrailService trailService) { this.trailService = trailService; }
+
+//    public ObjectController(ObjectService objectService) { this.objectService = objectService; }
 
     @GetMapping
     @Operation(summary = "Rerieves all trails")
@@ -42,6 +49,18 @@ public class TrailController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @PostMapping("/{id}/createObject")
+    @Operation(summary = "Create an object for trail")
+
+    public ResponseEntity<ObjectDTO> createObject(@RequestBody @Valid ObjectDTO objectDTO, @PathVariable Integer id) {
+        ObjectDTO object = objectService.createObject(objectDTO);
+        Integer objectId = object.getId();
+        trailService.addObject(objectId, id);
+        return ResponseEntity.ok(object);
+
+    }
+
 
     @PutMapping("/edit/{id}")
     @Operation(summary = "Update the trail")
