@@ -16,6 +16,5 @@ public interface TrailMapper {
     void toUpdateRequest(UpdateTrailRequest updateTrailRequest, @MappingTarget Trail trail);
 
     TrailObjectDTO toTrailObjectDTO(TrailObject trailObject);
-    TrailObject toTrailObjectEntity(Integer ObjectId, Integer TrailId);
 
 }
