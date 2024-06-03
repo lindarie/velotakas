@@ -18,7 +18,7 @@ export interface DialogData {
 @Component({
   selector: 'app-trails',
   standalone: true,
-  imports: [ FormsModule, ReactiveFormsModule, MaterialModule],
+  imports: [FormsModule, ReactiveFormsModule, MaterialModule, MatProgressSpinner],
   templateUrl: './trails.component.html',
   styleUrl: './trails.component.scss'
 })
@@ -79,6 +79,7 @@ export class TrailsComponent implements OnInit{
 }
 
 import { TrailService} from "../services/trails.service";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'dialog-overview-example-dialog',
