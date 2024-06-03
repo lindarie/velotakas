@@ -10,7 +10,7 @@ export const routes: Routes = [
   { path: '', component: MainComponent, children: [
     { path: '', redirectTo: 'sludinajumi', pathMatch: 'full' },
       { path: 'sludinajumi', loadChildren: () => import('./advertisements/advertisements.module').then(m => m.AdvertisementsModule) },
-      { path: 'trails', component: TrailsComponent}
+      { path: 'takas', component: TrailsComponent}
       ] },
 
 

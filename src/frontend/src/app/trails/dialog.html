@@ -8,6 +8,12 @@
     <p>User Name: {{ trailDetail.user.name }}</p>
     <!-- Add more fields as needed -->
   </mat-dialog-content>
+  @if (trailDetail.user.email === userEmail){
+    <mat-dialog-actions>
+      <button mat-button (click)="onDeleteClick(trailDetail.id)" style="background-color: #d30021; width: 100%">Delete</button>
+    </mat-dialog-actions>
+  }
+
 }
 @if (!trailDetail){
   <mat-dialog-content>
@@ -15,6 +21,8 @@
   </mat-dialog-content>
 }
 
+
+
 <mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Close</button>
+  <button mat-button (click)="onNoClick()" style="width: 100%">Close</button>
 </mat-dialog-actions>

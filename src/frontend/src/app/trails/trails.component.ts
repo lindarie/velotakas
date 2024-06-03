@@ -24,8 +24,12 @@ export interface DialogData {
 })
 export class TrailsComponent implements OnInit{
     trails: any = null;
+    isLogged: boolean = false;
 
-    constructor(private apiService: ApiService, private dialog: MatDialog) {
+    constructor(private apiService: ApiService, private dialog: MatDialog, private trailService: TrailService) {
+      this.trailService.refreshTrails.subscribe(() => {
+        this.getTrails();
+      });
     }
 
   openDialog(trail: any): void {
@@ -50,6 +54,13 @@ export class TrailsComponent implements OnInit{
 
     ngOnInit() {
       this.getTrails();
+       let user = localStorage.getItem('user');
+        if(user) {
+        let parsedUser = JSON.parse(user);
+        if(parsedUser && parsedUser.user) {
+          this.isLogged = true;
+        }
+}
     }
 
     getTrails() {
@@ -67,6 +78,7 @@ export class TrailsComponent implements OnInit{
     }
 }
 
+import { TrailService} from "../services/trails.service";
 
 @Component({
   selector: 'dialog-overview-example-dialog',
@@ -80,18 +92,27 @@ export class TrailsComponent implements OnInit{
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
-    MatDialogClose,
+    MatDialogClose
   ],
 })
 export class DialogOverviewExampleDialog {
   trailDetail: any;
+  userEmail: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private apiService: ApiService
+    private apiService: ApiService, private trailService: TrailService
   ) {
     this.getTrailDetail(data.trail.id);
+    // @ts-ignore
+    let user = localStorage.getItem('user');
+    if (user) {
+      // @ts-ignore
+      let parsedUser = JSON.parse(user);
+      if (parsedUser && parsedUser.user) {
+        this.userEmail = parsedUser.user;
+    }}
   }
 
   getTrailDetail(id: string) {
@@ -99,6 +120,18 @@ export class DialogOverviewExampleDialog {
       (response) => {
         this.trailDetail = response;
         console.log('Trail detail:', this.trailDetail);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  onDeleteClick(id: string): void {
+    this.apiService.deleteTrail(id).subscribe(
+      () => {
+        this.dialogRef.close(true);
+        this.trailService.refreshTrails.next();
       },
       (error) => {
         console.error(error);
@@ -128,6 +161,7 @@ export class AddTrailDialog {
     comment: new FormControl(''),
     // Add more form controls as needed
   });
+
 
   constructor(
     public dialogRef: MatDialogRef<AddTrailDialog>,

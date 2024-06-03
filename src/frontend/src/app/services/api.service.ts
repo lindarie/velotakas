@@ -23,4 +23,8 @@ export class ApiService {
     return this.http.post<any>(this.trailList + '/' + 'createTrail', trail);
   }
 
+  deleteTrail(id: string): Observable<any> {
+    return this.http.delete<any>(this.trailList + '/delete/' +  id);
+  }
+
 }
