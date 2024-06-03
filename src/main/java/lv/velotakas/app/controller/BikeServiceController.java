@@ -1,8 +1,6 @@
 package lv.velotakas.app.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
@@ -32,13 +30,9 @@ public class BikeServiceController {
     @PostMapping("/create")
     @Operation(summary = "Create a bike service")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully created a service",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ServiceRequest.class))}),
-            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Server error",
-                    content = @Content)})
+            @ApiResponse(responseCode = "200", description = "Successfully created a service"),
+            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid"),
+            @ApiResponse(responseCode = "500", description = "Server error")})
     public ResponseEntity<ServiceDTO> createBikeService(@RequestBody @Valid ServiceRequest request){
         if (!userService.doesUserExistByEmail(request.getUserEmail())) {
             log.warn("Bike service controller: User does not exist wit email " + request.getUserEmail());
@@ -50,11 +44,8 @@ public class BikeServiceController {
     @GetMapping
     @Operation(summary = "Retrieve all bike services")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved all bike services",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ServiceDTO.class))}),
-            @ApiResponse(responseCode = "500", description = "Server error",
-                    content = @Content)})
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved all bike services"),
+            @ApiResponse(responseCode = "500", description = "Server error")})
     ResponseEntity<List<ServiceDTO>> getAllBikeServices() {
         return ResponseEntity.ok(service.findAllBikeServices());
     }
@@ -62,15 +53,10 @@ public class BikeServiceController {
     @GetMapping("/{id}")
     @Operation(summary = "Retrieve a bike service")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved a bike service",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ServiceDTO.class))}),
-            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "Service not found",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Server error",
-                    content = @Content)})
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved a bike service"),
+            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid"),
+            @ApiResponse(responseCode = "404", description = "Service not found"),
+            @ApiResponse(responseCode = "500", description = "Server error")})
     ResponseEntity<ServiceDTO> getBikeService(@PathVariable Integer id) {
         if (service.serviceExistsById(id)) {
             ServiceDTO serviceDTO = service.findServiceById(id);
@@ -82,15 +68,10 @@ public class BikeServiceController {
     @PutMapping("/{id}")
     @Operation(summary = "Update a bike service")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Successfully updated a bike service",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ServiceUpdateRequest.class))}),
-            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "Bike service not found",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Server error",
-                    content = @Content)})
+            @ApiResponse(responseCode = "201", description = "Successfully updated a bike service"),
+            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid"),
+            @ApiResponse(responseCode = "404", description = "Bike service not found"),
+            @ApiResponse(responseCode = "500", description = "Server error")})
     ResponseEntity editBikeService(@RequestBody ServiceUpdateRequest updateRequest,
                             @PathVariable Integer id) {
         if (!service.serviceExistsById(id)) {
@@ -105,15 +86,10 @@ public class BikeServiceController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a bike service")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully deleted a user",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ServiceDTO.class))}),
-            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "User not found",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Server error",
-                    content = @Content)})
+            @ApiResponse(responseCode = "200", description = "Successfully deleted a user"),
+            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid"),
+            @ApiResponse(responseCode = "404", description = "User not found"),
+            @ApiResponse(responseCode = "500", description = "Server error")})
     ResponseEntity<Void> deleteBikeService(@PathVariable Integer id) {
         if (service.serviceExistsById(id)) {
             service.deleteServiceById(id);

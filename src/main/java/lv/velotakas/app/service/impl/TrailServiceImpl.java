@@ -7,6 +7,7 @@ import lv.velotakas.app.models.User;
 import lv.velotakas.app.repositories.TrailRepository;
 import lv.velotakas.app.repositories.UserRepository;
 import lv.velotakas.app.service.TrailService;
+import lv.velotakas.app.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +18,7 @@ import java.util.List;
 @Service
 public class TrailServiceImpl implements TrailService {
 
-    public TrailServiceImpl(TrailRepository trailRepository, TrailMapper trailMapper, UserRepository userRepository){
+    public TrailServiceImpl(TrailRepository trailRepository, TrailMapper trailMapper, UserRepository userRepository, UserService userService){
         this.trailRepository = trailRepository;
         this.trailMapper = trailMapper;
         this.userRepository = userRepository;
@@ -28,7 +29,7 @@ public class TrailServiceImpl implements TrailService {
 
     public TrailDTO createTrail(TrailDTO trailDTO){
         Trail trail = trailMapper.toEntity(trailDTO);
-        User user = userRepository.findById(1).orElseThrow(()-> new RuntimeException("User not found"));
+        User user = userRepository.findByEmail(trailDTO.getUserEmail()).orElseThrow(()-> new RuntimeException("User not found"));
         trail.setUser(user);
         Trail savedTrail = trailRepository.save(trail);
         return trailMapper.toDTO(savedTrail);

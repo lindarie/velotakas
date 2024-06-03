@@ -103,7 +103,7 @@ public class UserControllerTest {
     @Test
     public void testEditUser_NotFound() throws Exception {
         int userId = 1;
-        UpdateUserRequest updateUserRequest = new UpdateUserRequest("John", "Doe", LocalDate.of(1990, 1, 1), "Description", "john@example.com", "password", true, "filePath");
+        UpdateUserRequest updateUserRequest = new UpdateUserRequest("John", "Doe", LocalDate.of(1990, 1, 1), "Description", "john@example.com", true, "filePath");
 
         mockMvc.perform(put("/api/user/edit/{id}", userId)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -115,7 +115,7 @@ public class UserControllerTest {
     @Test
     public void testEditUser_BadRequest() throws Exception {
         int userId = 1;
-        UpdateUserRequest updateUserRequest = new UpdateUserRequest("John", "Doe", LocalDate.of(1990, 1, 1), "Description", "john@example.com", "password", true, "filePath");
+        UpdateUserRequest updateUserRequest = new UpdateUserRequest("John", "Doe", LocalDate.of(1990, 1, 1), "Description", "john@example.com", true, "filePath");
         when(userService.userExistsById(1)).thenReturn(true);
         mockMvc.perform(put("/api/user/edit/{id}", userId)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -127,7 +127,7 @@ public class UserControllerTest {
     @Test
     public void testEditUser_Successful() throws Exception {
         int userId = 1;
-        UpdateUserRequest updateUserRequest = new UpdateUserRequest("John", "Doe", LocalDate.of(1990, 1, 1), "Description", "john@example.com", "password", false, "filePath");
+        UpdateUserRequest updateUserRequest = new UpdateUserRequest("John", "Doe", LocalDate.of(1990, 1, 1), "Description", "john@example.com", false, "filePath");
         when(userService.userExistsById(1)).thenReturn(true);
         mockMvc.perform(put("/api/user/edit/{id}", userId)
                         .contentType(MediaType.APPLICATION_JSON)

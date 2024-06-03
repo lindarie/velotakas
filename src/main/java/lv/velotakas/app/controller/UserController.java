@@ -2,7 +2,6 @@ package lv.velotakas.app.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
@@ -13,7 +12,6 @@ import lv.velotakas.app.dto.request.user.RegisterRequest;
 import lv.velotakas.app.dto.request.user.UpdateUserRequest;
 import lv.velotakas.app.dto.response.AuthenticationResponse;
 import lv.velotakas.app.dto.response.UserDAO;
-import lv.velotakas.app.models.User;
 import lv.velotakas.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,13 +30,9 @@ public class UserController {
     @PostMapping("/register")
     @Operation(summary = "Create a user")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully created a user",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = RegisterRequest.class))}),
-            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Server error",
-                    content = @Content)})
+            @ApiResponse(responseCode = "200", description = "Successfully created a user"),
+            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid"),
+            @ApiResponse(responseCode = "500", description = "Server error")})
     public ResponseEntity<AuthenticationResponse> register(@RequestBody @Valid RegisterRequest request){
         if (service.doesUserExistByEmail(request.getEmail())) {
             return ResponseEntity.badRequest().build();
@@ -48,13 +42,9 @@ public class UserController {
     @PostMapping("/authenticate")
     @Operation(summary = "Log in a user")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully logged in user",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = AuthenticationRequest.class))}),
-            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Server error",
-                    content = @Content)})
+            @ApiResponse(responseCode = "200", description = "Successfully logged in user"),
+            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid"),
+            @ApiResponse(responseCode = "500", description = "Server error")})
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
         return ResponseEntity.ok(service.authenticate(request));
     }
@@ -66,9 +56,7 @@ public class UserController {
     @GetMapping
     @Operation(summary = "Retrieve all users")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved all users",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserDAO.class))}),
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved all users"),
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
     ResponseEntity<List<UserDAO>> getAllUsers() {
@@ -78,13 +66,9 @@ public class UserController {
     @GetMapping("/{id}")
     @Operation(summary = "Retrieve a user")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved a user",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = User.class))}),
-            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "User not found",
-                    content = @Content),
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved a user"),
+            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid"),
+            @ApiResponse(responseCode = "404", description = "User not found"),
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content)})
     ResponseEntity<UserDAO> getUserById(@PathVariable Integer id) {
@@ -98,15 +82,10 @@ public class UserController {
     @PutMapping("/edit/{id}")
     @Operation(summary = "Update a user")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Successfully updated a user",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserDAO.class))}),
-            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "User not found",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Server error",
-                    content = @Content)})
+            @ApiResponse(responseCode = "201", description = "Successfully updated a user"),
+            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid"),
+            @ApiResponse(responseCode = "404", description = "User not found"),
+            @ApiResponse(responseCode = "500", description = "Server error" )})
     ResponseEntity editUser(@RequestBody UpdateUserRequest updateRequest,
                                   @PathVariable Integer id) {
         if (!service.userExistsById(id)) {
@@ -125,15 +104,10 @@ public class UserController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a user")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully deleted a user",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserDAO.class))}),
-            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "User not found",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Server error",
-                    content = @Content)})
+            @ApiResponse(responseCode = "200", description = "Successfully deleted a user"),
+            @ApiResponse(responseCode = "400", description = "Missed required parameters, parameters are not valid"),
+            @ApiResponse(responseCode = "404", description = "User not found"),
+            @ApiResponse(responseCode = "500", description = "Server error")})
     ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
         if (service.userExistsById(id)) {
             service.deleteUserById(id);

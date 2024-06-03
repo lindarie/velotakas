@@ -16,5 +16,6 @@ public class AdvertisementDTO {
     private BigDecimal price;
     private LocalDateTime timeLimit;
     private String filePath;
-    private Integer userId;
+    private String userEmail;
+
 }

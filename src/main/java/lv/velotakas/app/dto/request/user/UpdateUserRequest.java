@@ -40,10 +40,6 @@ public class UpdateUserRequest {
     @Email
     @Size(max = 30)
     private String email;
-    @NotNull
-    @NotBlank
-    @Size(min = 8, max = 50)
-    private String password;
     private boolean emailChange;
     private String filePath;
 }
