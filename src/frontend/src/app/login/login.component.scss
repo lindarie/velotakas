@@ -1,21 +1,62 @@
+.component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(45deg, green, #805248); // Gradient background from green to brown
+}
+
 .login-container {
   width: 300px;
-  margin: 0 auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); // Optional: Add a little shadow for a "lifted" effect
 }
 
 form {
   display: flex;
   flex-direction: column;
+  gap: 10px; // Creates a consistent gap between form elements
 }
 
 label {
-  margin-top: 10px;
+  font-size: 1.1em; // Increases the font size of the label
+  color: #333; // Changes the color of the label
 }
 
 input {
-  margin-bottom: 10px;
+  padding: 10px; // Adds padding inside the input fields
+  border: 1px solid #ccc; // Adds a border to the input fields
+  border-radius: 5px; // Rounds the corners of the input fields
 }
 
 button {
   margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50; // Change this to your preferred color
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #45a049;
+  }
+}
+
+.register {
+  margin-top: 20px; // Adds some space above the register div
+  text-align: center; // Centers the text inside the register div
+
+  a {
+    color: #4CAF50; // Changes the color of the link
+    text-decoration: none; // Removes the underline from the link
+
+    &:hover {
+      color: #45a049; // Changes the color of the link when hovered over
+    }
+  }
 }

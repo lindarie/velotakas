@@ -1,0 +1,35 @@
+<div class="component">
+  @if(isLogged){
+    <div class="bar">
+      <button mat-raised-button color="primary" (click)="openAddTrailDialog()">Pievienot taku</button>
+    </div>
+  }
+  @if (!trails){
+    <div class="loading">
+      <mat-spinner diameter="100" style="margin-top: 40px"></mat-spinner>
+    </div>
+  }
+  @if (trails && trails.length === 0){
+    <p>No trails found</p>
+  }
+  @if (trails && trails.length > 0){
+  <table class="trails-list">
+    <thead>
+      <tr class="trails-header">
+        <th class="trail-name">Nosaukums</th>
+        <th class="trail-surface">Virsmas veids</th>
+        <th class="trail-complexity">Sarežģītība</th>
+      </tr>
+    </thead>
+    <tbody>
+    @for (trail of trails; track trail.id){
+      <tr (click)="openDialog(trail)">
+        <td class="trail-name">{{ trail.name }}</td>
+        <td class="trail-surface">{{ trail.surface }}</td>
+        <td class="trail-complexity">{{ trail.complexity }}</td>
+      </tr>
+    }
+    </tbody>
+  </table>
+  }
+</div>

@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Add Trail</h2>
+<form [formGroup]="trailForm" (ngSubmit)="addTrail()">
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Surface</mat-label>
+      <input matInput formControlName="surface">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Complexity</mat-label>
+      <input matInput formControlName="complexity">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Comment</mat-label>
+      <input matInput formControlName="comment">
+    </mat-form-field>
+    <!-- Add more form fields as needed -->
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button type="submit">Add</button>
+  </mat-dialog-actions>
+</form>
