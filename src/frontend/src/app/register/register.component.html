@@ -1,51 +1,28 @@
-<mat-card class="form-card">
-  <mat-card-header>
-    <mat-card-title>Register a new user</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="component">
+  <div class="register-container">
     <form class="register-form" [formGroup]="registerForm" (ngSubmit)="register()">
+      <label for="name">Name:</label>
+      <input type="text" id="name" formControlName="name" required>
 
-      <!-- Name -->
-      <mat-form-field class="example-full-width">
-        <mat-label>Name</mat-label>
-        <input matInput type="text" formControlName="name" required>
-      </mat-form-field>
+      <label for="surname">Surname:</label>
+      <input type="text" id="surname" formControlName="surname" required>
 
-      <!-- Surname -->
-      <mat-form-field class="example-full-width">
-        <mat-label>Surname</mat-label>
-        <input matInput type="text" formControlName="surname" required>
-      </mat-form-field>
+      <label for="dateOfBirth">Date of Birth:</label>
+      <input type="date" id="dateOfBirth" formControlName="dateOfBirth" required>
 
-      <!-- Date of Birth -->
-<mat-form-field class="example-full-width">
-  <mat-label>Date of Birth</mat-label>
-  <input matInput [matDatepicker]="dp" (dateChange)="onDateChange($event)" formControlName="dateOfBirth">
-  <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
-  <mat-datepicker #dp></mat-datepicker>
-</mat-form-field>
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email" required>
 
-      <!-- Email -->
-      <mat-form-field class="example-full-width">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" formControlName="email" required>
-      </mat-form-field>
+      <label for="description">Description:</label>
+      <textarea id="description" formControlName="description" required></textarea>
 
-      <!-- Description -->
-      <mat-form-field class="example-full-width">
-        <mat-label>Description</mat-label>
-        <textarea matInput type="text" formControlName="description" required></textarea>
-      </mat-form-field>
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password" required>
 
-      <!-- Password -->
-      <mat-form-field class="example-full-width">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" formControlName="password" required>
-      </mat-form-field>
-
-      <div class="button-group">
-        <button mat-raised-button color="primary" type="submit">Register</button>
-      </div>
+      <button type="submit">Register</button>
     </form>
-  </mat-card-content>
-</mat-card>
+    <div class="login">
+      <a [routerLink]="['/login']">or if you are already registered</a>
+    </div>
+  </div>
+</div>

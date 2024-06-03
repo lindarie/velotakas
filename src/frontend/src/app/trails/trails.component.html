@@ -1,0 +1,23 @@
+<div class="component">
+  <div class="bar">
+    <button mat-raised-button color="primary" (click)="openAddTrailDialog()">Add Trail</button>
+  </div>
+  <table class="trails-list">
+    <thead>
+      <tr class="trails-header">
+        <th class="trail-name">Name</th>
+        <th class="trail-surface">Surface</th>
+        <th class="trail-complexity">Complexity</th>
+      </tr>
+    </thead>
+    <tbody>
+    @for (trail of trails; track trail.id){
+      <tr (click)="openDialog(trail)">
+        <td class="trail-name">{{ trail.name }}</td>
+        <td class="trail-surface">{{ trail.surface }}</td>
+        <td class="trail-complexity">{{ trail.complexity }}</td>
+      </tr>
+    }
+    </tbody>
+  </table>
+</div>

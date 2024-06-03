@@ -29,7 +29,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatGridListModule,
     MaterialFileInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   exports: [
     MatToolbarModule,
@@ -43,7 +43,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatGridListModule,
     MaterialFileInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ]
 })
 export class MaterialModule { }

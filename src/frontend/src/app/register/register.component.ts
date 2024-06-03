@@ -5,12 +5,13 @@ import { MaterialModule} from "../material/material.module";
 import {DateAdapter} from "@angular/material/core";
 import { formatDate} from "@angular/common";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
+import { RouterLink, Router} from "@angular/router";
 
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, MaterialModule, ReactiveFormsModule],
+  imports: [FormsModule, MaterialModule, ReactiveFormsModule,RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -24,7 +25,7 @@ export class RegisterComponent {
     description: new FormControl('')
   });
 
-  constructor(private authService: AuthService, private dateAdapter: DateAdapter<Date>) {
+  constructor(private authService: AuthService, private dateAdapter: DateAdapter<Date>, private router: Router) {
     this.dateAdapter.setLocale(navigator.language);
 
   }
@@ -48,6 +49,7 @@ export class RegisterComponent {
       .subscribe(
         () => {
           console.log('User registered successfully');
+          this.router.navigate(['/login']);
         },
         (error) => {
           console.error(error);

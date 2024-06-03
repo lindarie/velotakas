@@ -1,6 +1,16 @@
-import { CanActivateFn } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 
-export const guardGuard: CanActivateFn = (route, state) => {
+class guardGuard implements CanActivate {
 
-  return true;
+  constructor(private router: Router) {}
+
+  canActivate() {
+    if (localStorage.getItem('token')) {
+      return true;
+    }
+
+    this.router.navigate(['/login']);
+    return false;
+
+  }
 };

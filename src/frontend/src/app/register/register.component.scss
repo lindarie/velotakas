@@ -1,21 +1,62 @@
+.component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(45deg, green, #805248);
+}
+
 .register-container {
   width: 300px;
-  margin: 0 auto;
-}
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
-form {
-  display: flex;
-  flex-direction: column;
-}
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 
-label {
-  margin-top: 10px;
-}
+    label {
+      font-size: 1.1em;
+      color: #333;
+    }
 
-input {
-  margin-bottom: 10px;
-}
+    input, textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
 
-button {
-  margin-top: 20px;
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #45a049;
+      }
+    }
+  }
+
+  .login {
+    margin-top: 20px;
+    text-align: center;
+
+    a {
+      color: #4CAF50;
+      text-decoration: none;
+
+      &:hover {
+        color: #45a049;
+      }
+    }
+  }
 }

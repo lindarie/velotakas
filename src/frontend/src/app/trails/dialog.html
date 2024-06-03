@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Trail Details</h2>
+@if (trailDetail){
+  <mat-dialog-content>
+    <p>Name: {{ trailDetail.name }}</p>
+    <p>Surface: {{ trailDetail.surface }}</p>
+    <p>Complexity: {{ trailDetail.complexity }}</p>
+    <p>Comment: {{ trailDetail.comment }}</p>
+    <p>User Name: {{ trailDetail.user.name }}</p>
+    <!-- Add more fields as needed -->
+  </mat-dialog-content>
+}
+@if (!trailDetail){
+  <mat-dialog-content>
+    <p>Loading...</p>
+  </mat-dialog-content>
+}
+
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Close</button>
+</mat-dialog-actions>
