@@ -26,7 +26,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 
     public AdvertisementDTO createAdvertisement(AdvertisementDTO advertisementDTO) {
         Advertisement advertisement = advertisementMapper.toEntity(advertisementDTO);
-        User user = userRepository.findById(1).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findByEmail(advertisementDTO.getUserEmail()).orElseThrow(() -> new RuntimeException("User not found"));
         advertisement.setUser(user);
         advertisement.setTimeLimit(LocalDateTime.now().plusMonths(6).with(LocalTime.MAX));
         Advertisement savedAdvertisement = adRepository.save(advertisement);

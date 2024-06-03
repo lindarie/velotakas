@@ -3,9 +3,9 @@ package lv.velotakas.app.dto.request.trail;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lv.velotakas.app.dto.response.UserDAO;
 import lv.velotakas.app.models.TrailObject;
 import lv.velotakas.app.models.TrailRating;
-import lv.velotakas.app.models.User;
 
 import java.util.Set;
 
@@ -18,7 +18,8 @@ public class TrailDTO {
     private String surface;
     private Integer complexity;
     private String comment;
-    private User user;
+    private String userEmail;
+    private UserDAO user;
     private Set<TrailRating> trailRatings;
     private Set<TrailObject> trailObjects;
 }
