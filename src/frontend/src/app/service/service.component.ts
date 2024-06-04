@@ -6,7 +6,11 @@ import {MatDialog, MatDialogRef,
   MatDialogContent, MatDialogTitle,
 MAT_DIALOG_DATA} from "@angular/material/dialog";
 import { MaterialModule } from '../material/material.module';
-import {FormsModule, ReactiveFormsModule, FormGroup, FormControl} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators} from '@angular/forms';
+import {CommonModule} from "@angular/common";
+import {FileInput} from "ngx-custom-material-file-input";
+import {AlertService} from "../alert/alert.service";
+import {Advertisement} from "../advertisements/shared/advertisement";
 
 export interface DialogData {
   service: any;
@@ -58,6 +62,9 @@ export class ServiceComponent implements OnInit {
 
   }
 
+  getShortComment(comment: string) {
+    return comment.length > 50 ? comment.slice(0, 50) + '...' : comment;
+  }
 }
 
 
@@ -67,27 +74,28 @@ export class ServiceComponent implements OnInit {
   selector: 'add-service',
   standalone: true,
   imports: [
-    FormsModule, ReactiveFormsModule, MaterialModule, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose
+    FormsModule, ReactiveFormsModule, MaterialModule, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose,
+    CommonModule
   ],
   templateUrl: './add.html',
 })
 export class AddServiceComponent implements OnInit {
-  serviveForm: FormGroup = new FormGroup({
-    name: new FormControl(''),
-    comment: new FormControl(''),
-    filePath: new FormControl(''),
-    userEmail: new FormControl(''),
+  serviceForm = new FormGroup({
+    name: new FormControl('', Validators.required),
+    comment: new FormControl('', [Validators.required, Validators.maxLength(300)]),
+    file: new FormControl('', Validators.required),
+    userEmail: new FormControl('')
   });
 
   ngOnInit(): void {
   }
 
-  constructor(private apiService: ApiService, public dialogRef: MatDialogRef<AddServiceComponent>) {
+  constructor(private apiService: ApiService, public dialogRef: MatDialogRef<AddServiceComponent>, private alertService: AlertService) {
     let user = localStorage.getItem('user');
     if (user) {
       let parsedUser = JSON.parse(user);
       if (parsedUser && parsedUser.user) {
-        this.serviveForm.controls['userEmail'].setValue(parsedUser.user);
+        this.serviceForm.controls['userEmail'].setValue(parsedUser.user);
       }
     }
   }
@@ -96,16 +104,30 @@ export class AddServiceComponent implements OnInit {
     this.dialogRef.close();
   }
 
-
   addService() {
-    this.apiService.createBikeService(this.serviveForm.value).subscribe(
-      () => {
-        this.dialogRef.close(true);
-      },
-      (error) => {
-        console.error(error);
+    if (this.serviceForm.valid) {
+      const fileControl = this.serviceForm.get('file');
+      if (fileControl && fileControl.value) {
+        const fileInput = fileControl.value as unknown as FileInput;
+        const file = fileInput.files[0];
+        let user = localStorage.getItem('user');
+        this.apiService.uploadFile(file).subscribe(
+            imageResponse => {
+              const serviceData = {
+                name: this.serviceForm.get('name')?.value,
+                comment: this.serviceForm.get('comment')?.value,
+                userEmail: this.serviceForm.get('userEmail')?.value,
+                filePath: imageResponse.filePath
+              };
+                this.apiService.createBikeService(serviceData).subscribe(
+                    () => {this.dialogRef.close(true);},
+                    (error) => {console.error(error);}
+                );
+            },
+            error => {this.alertService.danger('Radās kļūda faila ielādē, lūdzu mēģiniet vēlreiz!');}
+        );
       }
-    );
+    } else {this.alertService.danger('Kļūda ievadē! Pārliecinieties, vai ir ievadīti pareizi dati!');}
   }
 }
 
@@ -158,5 +180,9 @@ export class DetailsServiceComponent {
         console.error(error);
       }
     );
+  }
+
+  getImageUrl(advertisement: Advertisement): string {
+    return `/api/files/${advertisement.filePath}`;
   }
 }

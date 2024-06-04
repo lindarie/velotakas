@@ -1,16 +1,16 @@
-<h2 mat-dialog-title>Trail Details</h2>
+<h2 mat-dialog-title>Takas informācija</h2>
 @if (trailDetail){
   <mat-dialog-content>
-    <p>Name: {{ trailDetail.name }}</p>
-    <p>Surface: {{ trailDetail.surface }}</p>
-    <p>Complexity: {{ trailDetail.complexity }}</p>
-    <p>Comment: {{ trailDetail.comment }}</p>
-    <p>User Name: {{ trailDetail.user.name }}</p>
+    <p>Nosaukums: {{ trailDetail.name }}</p>
+    <p>Segums: {{ trailDetail.surface }}</p>
+    <p>Sarežģītība: {{ trailDetail.complexity }}</p>
+    <p>Apraksts: {{ trailDetail.comment }}</p>
+    <p>Autors: {{ trailDetail.user.name}} {{trailDetail.user.surname}}</p>
     <!-- Add more fields as needed -->
   </mat-dialog-content>
   @if (trailDetail.user.email === userEmail){
     <mat-dialog-actions>
-      <button mat-button (click)="onDeleteClick(trailDetail.id)" style="background-color: #d30021; width: 100%; color: white">Delete</button>
+      <button mat-button (click)="onDeleteClick(trailDetail.id)" style="background-color: #d30021; width: 100%; color: white">dzēst</button>
     </mat-dialog-actions>
   }
 
@@ -24,5 +24,5 @@
 
 
 <mat-dialog-actions>
-  <button mat-button (click)="onNoClick()" style="width: 100%">Close</button>
+  <button mat-button (click)="onNoClick()" style="width: 100%">aizvērt</button>
 </mat-dialog-actions>

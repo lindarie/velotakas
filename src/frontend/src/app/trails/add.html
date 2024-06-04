@@ -4,6 +4,7 @@
     <mat-form-field>
       <mat-label>Nosaukums</mat-label>
       <input matInput formControlName="name">
+      <mat-error *ngIf="trailForm.controls.name.hasError('required')">Nosaukums ir obligāts</mat-error>
     </mat-form-field>
 <mat-form-field>
   <mat-label>Virsmas veids</mat-label>
@@ -16,19 +17,26 @@
     <mat-option value="Jaukts">Jaukts</mat-option>
     <mat-option value="Cits">Cits</mat-option>
   </mat-select>
+  <mat-error *ngIf="trailForm.controls.surface.hasError('required')">Virsmas veids ir obligāts</mat-error>
 </mat-form-field>
     <mat-form-field>
       <mat-label>Sarežģītība (1-10)</mat-label>
       <input matInput formControlName="complexity">
+      <mat-error *ngIf="trailForm.controls.complexity.hasError('required')">Sarežģītība ir obligāta</mat-error>
+      <mat-error *ngIf="trailForm.controls.complexity.hasError('min')">Sarežģītībai jābūt vismaz 1</mat-error>
+      <mat-error *ngIf="trailForm.controls.complexity.hasError('max')">Sarežģītībai jābūt zem 10</mat-error>
     </mat-form-field>
-    <mat-form-field>
+
+    <mat-form-field class="example-full-width" hintLabel="Max 300 rakstzīmes">
       <mat-label>Apraksts</mat-label>
-      <input matInput formControlName="comment">
+      <textarea matInput #input maxlength="300" formControlName="comment" placeholder="Šī velotaka.."></textarea>
+      <mat-hint align="end">{{input.value.length}}/300</mat-hint>
+      <mat-error *ngIf="trailForm.controls.comment.hasError('required')">Apraksts ir obligāts</mat-error>
     </mat-form-field>
-    <!-- Add more form fields as needed -->
+
   </mat-dialog-content>
   <mat-dialog-actions style="justify-content: space-between">
     <button mat-button (click)="onNoClick()">Atcelt</button>
-    <button mat-button type="submit">Pievienot</button>
+    <button mat-button [disabled]="!trailForm.valid">Pievienot</button>
   </mat-dialog-actions>
 </form>
