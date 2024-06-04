@@ -4,7 +4,14 @@
     <li><a [routerLink]="['/pakalpojumi']" [routerLinkActive]="['active']">Pakalpojumi</a></li>
     <li><a [routerLink]="['/reklamas']" [routerLinkActive]="['active']">Sludinājumi</a></li>
   </ul>
-  <div class="log-out" (click)="logout()">
-    iziet
-  </div>
+    @if(!isLogged){
+    <div class="log-out" (click)="login()">
+        <p>Ienākt</p>
+    </div>
+    }
+  @if(isLogged){
+    <div class="log-out" (click)="logout()">
+        <p>Iziet</p>
+    </div>
+  }
 </nav>

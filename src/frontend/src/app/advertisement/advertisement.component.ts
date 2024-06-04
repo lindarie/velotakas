@@ -34,6 +34,7 @@ export class AdvertisementComponent implements OnInit {
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private dialog: MatDialog, private adsService: AdsService) {
     this.adsService.refreshAds.subscribe(() => {
+      console.log('Refreshing ads');
       this.getAdvertisements();
     });
   }
@@ -80,7 +81,7 @@ export class AddAdvertisementDialog {
   private alertService: any;
   categories = categories;
 
-  constructor(public dialogRef: MatDialogRef<AddAdvertisementDialog>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private apiService: ApiService) {}
+  constructor(public dialogRef: MatDialogRef<AddAdvertisementDialog>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private apiService: ApiService, private adsService: AdsService) {}
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -92,43 +93,43 @@ export class AddAdvertisementDialog {
     });
   }
 
-  onSubmit() {
-    if (this.adsForm.valid) {
+onSubmit() {
+  if (this.adsForm.valid) {
+    const fileControl = this.adsForm.get('file');
 
-      const fileControl = this.adsForm.get('file');
-
-      if (fileControl && fileControl.value) {
-        const fileInput = fileControl.value as FileInput;
-        const file = fileInput.files[0];
-        this.apiService.uploadFile(file).subscribe(
-          imageResponse => {
-            const advertisementData = {
-              category: this.adsForm.get('category')?.value,
-              description: this.adsForm.get('description')?.value,
-              price: this.adsForm.get('price')?.value,
-              filePath: imageResponse.filePath,
-              userEmail: JSON.parse(<string>localStorage.getItem('user')).user
-            };
-            this.apiService.submitAdvertisementData(advertisementData).subscribe(
-              response => {
-                this.dialogRef.close();
-
-              },
-              error => {
-                console.error(error);
-              }
-            );
-          },
-          error => {
-            this.alertService.danger('Radās kļūda faila ielādē, lūdzu mēģiniet vēlreiz!');
-            console.error(error);
-          }
-        );
-      }
-    } else {
-      this.alertService.danger('Kļūda ievadē! Pārliecinieties, vai ir ievadīti pareizi dati!');
+    if (fileControl && fileControl.value) {
+      const fileInput = fileControl.value as FileInput;
+      const file = fileInput.files[0];
+      this.apiService.uploadFile(file).subscribe(
+        imageResponse => {
+          const advertisementData = {
+            category: this.adsForm.get('category')?.value,
+            description: this.adsForm.get('description')?.value,
+            price: this.adsForm.get('price')?.value,
+            filePath: imageResponse.filePath,
+            userEmail: JSON.parse(<string>localStorage.getItem('user')).user
+          };
+          this.apiService.submitAdvertisementData(advertisementData).subscribe(
+            response => {
+              console.log('Advertisement added:', response);
+              this.adsService.triggerRefresh(); // Move this line here
+              this.dialogRef.close();
+            },
+            error => {
+              console.error(error);
+            }
+          );
+        },
+        error => {
+          this.alertService.danger('Radās kļūda faila ielādē, lūdzu mēģiniet vēlreiz!');
+          console.error(error);
+        }
+      );
     }
+  } else {
+    this.alertService.danger('Kļūda ievadē! Pārliecinieties, vai ir ievadīti pareizi dati!');
   }
+}
 
 }
 
