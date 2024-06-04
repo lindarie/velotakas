@@ -130,7 +130,10 @@ export class AddServiceComponent implements OnInit {
                 filePath: imageResponse.filePath
               };
                 this.apiService.createBikeService(serviceData).subscribe(
-                    () => {this.dialogRef.close(true);},
+                    () => {
+                      this.alertService.success('Pakalpojums tika pievienots veiksmīgi!');
+                      this.dialogRef.close(true);
+                      },
                     (error) => {console.error(error);}
                 );
             },
