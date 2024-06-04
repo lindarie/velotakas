@@ -81,6 +81,7 @@ export class TrailsComponent implements OnInit{
 import { TrailService} from "../services/trails.service";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {CommonModule} from "@angular/common";
+import {AlertService} from "../alert/alert.service";
 
 @Component({
   selector: 'dialog-overview-example-dialog',
@@ -169,7 +170,8 @@ export class AddTrailDialog {
 
   constructor(
     public dialogRef: MatDialogRef<AddTrailDialog>,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private alertService: AlertService
   ) {
     // @ts-ignore
     let user = localStorage.getItem('user');
@@ -189,9 +191,11 @@ export class AddTrailDialog {
   addTrail(): void {
     this.apiService.addTrail(this.trailForm.value).subscribe(
       () => {
+        this.alertService.success('Taka tika pievienota veiksmīgi!');
         this.dialogRef.close(true);
       },
       (error) => {
+        this.alertService.danger('Radās kļūda, lūdzu mēģiniet vēlreiz!');
         console.error(error);
       }
     );
