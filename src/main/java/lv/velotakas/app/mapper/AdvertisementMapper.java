@@ -1,6 +1,7 @@
 package lv.velotakas.app.mapper;
 
 import lv.velotakas.app.dto.request.advertisement.AdvertisementDTO;
+import lv.velotakas.app.dto.response.advertisement.AdvertisementResponseDTO;
 import lv.velotakas.app.models.Advertisement;
 import org.mapstruct.Mapper;
 
@@ -8,4 +9,5 @@ import org.mapstruct.Mapper;
 public interface AdvertisementMapper {
     AdvertisementDTO toDto(Advertisement advertisement);
     Advertisement toEntity(AdvertisementDTO advertisementDTO);
+    AdvertisementResponseDTO toResponseDto(Advertisement advertisement);
 }

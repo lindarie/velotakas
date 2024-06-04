@@ -1,2 +1,33 @@
 <h2>{{ category }}</h2>
+<mat-card>
+  <div>{{ totalRecords }} rezultāti</div>
+  <mat-card-content>
+    <table mat-table [dataSource]="advertisements" class="mat-elevation-z8" >
+      <!-- Fotogrāfija -->
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef> Fotogrāfija </th>
+        <td mat-cell *matCellDef="let advertisement">
+          <img [src]="getImageUrl(advertisement)" alt="Advertisement Image" width="100" height="100">
+        </td>
+      </ng-container>
+
+      <!-- Apraksts -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Apraksts </th>
+        <td mat-cell *matCellDef="let advertisement"> {{advertisement.description}} </td>
+      </ng-container>
+
+      <!-- Cena -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Cena </th>
+        <td mat-cell *matCellDef="let advertisement"> {{advertisement.price}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let advertisement; columns: displayedColumns;" (click)="navigateToDetail(advertisement)"></tr>
+
+    </table>
+  </mat-card-content>
+</mat-card>
+
 <button mat-raised-button color="primary" routerLink="/sludinajumi/jauns">Izvietot sludinājumu</button>

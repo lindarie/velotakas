@@ -9,13 +9,15 @@ import {AdvertisementFormComponent} from "./components/advertisement-form/advert
 import {AdvertisementListComponent} from "./components/advertisement-list/advertisement-list.component";
 import {CategoryListComponent} from "./components/category-list/category-list.component";
 import {MaterialModule} from "../material/material.module";
+import {AdvertisementDetailComponent} from "./components/advertisement-detail/advertisement-detail.component";
 
 
 @NgModule({
   declarations: [
     AdvertisementFormComponent,
     AdvertisementListComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    AdvertisementDetailComponent
   ],
   imports: [
     CommonModule,

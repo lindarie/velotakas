@@ -1,0 +1,38 @@
+.category-list-container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.category-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.category-item {
+  flex: 1 0 16%;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.category-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  margin: 0 auto 10px;
+}
+
+.category-item h3 {
+  margin: 0;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.category-item:hover h3 {
+  text-decoration: underline;
+}
