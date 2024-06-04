@@ -5,6 +5,11 @@
   <p>Apraksts: {{ serviceDetail.comment }}</p>
   <p>Kontaktpersona: {{ serviceDetail.user.email }}</p>
 </mat-dialog-content>
+@if (serviceDetail.user.email === userEmail){
+  <mat-dialog-actions>
+    <button mat-button (click)="onDeleteClick(serviceDetail.id)" style="background-color: #d30021; width: 100%; color: white">Dzēst</button>
+  </mat-dialog-actions>
+}
 <mat-dialog-actions>
-  <button mat-button (click)="onNoClick()" style="width: 100%">aizvērt</button>
+  <button mat-button (click)="onNoClick()" style="width: 100%">Aizvērt</button>
 </mat-dialog-actions>

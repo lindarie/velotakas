@@ -1,0 +1,20 @@
+<div class="component">
+  @if (categories && categories.length === 0){
+    <p>No categories found</p>
+  }
+  @if (categories && categories.length > 0){
+    <div class="categories">
+    <div class="categories-list">
+      @for (category of categories; track category.value){
+
+      <div (click)="navigate(category.url, category.value)" class="category-item">
+        <img src="{{ category.img }}" alt="Category Image">
+        {{ category.value }}
+      </div>
+      }
+      <button (click)="resetCategory()">Show All</button>
+    </div>
+      <router-outlet></router-outlet>
+  </div>
+  }
+</div>

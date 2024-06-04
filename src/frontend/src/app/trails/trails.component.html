@@ -1,10 +1,10 @@
 <div class="component">
+  <div class="bar">
+    <h2 class="component-title">Takas</h2>
   @if(isLogged){
-    <div class="bar">
-      <h2 class="component-title">Takas</h2>
       <button mat-raised-button color="primary" (click)="openAddTrailDialog()">Pievienot taku</button>
-    </div>
   }
+  </div>
   @if (!trails){
     <div class="loading">
       <mat-spinner diameter="100" style="margin-top: 40px"></mat-spinner>

@@ -1,4 +1,12 @@
 <div class="component">
+  <div class="bar">
+    <h2 class="component-title">Pakalpojumi</h2>
+    @if(isLogged){
+      <div class="add-button">
+        <button mat-raised-button color="primary" (click)="openAddServiceDialog()">Pievienot pakalpojumu</button>
+      </div>
+    }
+  </div>
   @if (!services){
     <div class="loading">
       <mat-spinner diameter="100" style="margin-top: 40px"></mat-spinner>
@@ -8,12 +16,6 @@
     <p>No services found</p>
   }
   @if (services && services.length > 0){
-    <div class="bar">
-      <h2 class="component-title">Pakalpojumi</h2>
-      <div class="add-button">
-        <button mat-raised-button color="primary"  (click)="openAddServiceDialog()">Pievienot pakalpojumu</button>
-      </div>
-    </div>
     <table class="services-list">
       <thead>
         <tr class="services-header">

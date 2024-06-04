@@ -7,7 +7,7 @@
       <mat-error *ngIf="serviceForm.controls.name.hasError('required')">Nosaukums ir obligāts</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width" hintLabel="Max 300 rakstzīmes">
+    <mat-form-field class="example-full-width" hintLabel="Max 300 rakstzīmes" style="margin-bottom: 10px">
       <mat-label>Apraksts</mat-label>
       <textarea matInput #input maxlength="300" formControlName="comment" placeholder="Serviss piedāvā.."></textarea>
       <mat-hint align="end">{{input.value.length}}/300</mat-hint>

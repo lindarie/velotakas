@@ -27,14 +27,24 @@ export interface DialogData {
 })
 export class ServiceComponent implements OnInit {
   services: any;
+  isLogged: boolean = false;
 
-  constructor(private apiService: ApiService, private dialog: MatDialog) {}
+  constructor(private apiService: ApiService, private dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.apiService.getBikeService().subscribe((data) => {
       console.log(data);
       this.services = data;
     });
+    let user = localStorage.getItem('user');
+    if (user) {
+      let parsedUser = JSON.parse(user);
+      if (parsedUser && parsedUser.user) {
+        this.isLogged = true;
+      }
+
+    }
   }
   openAddServiceDialog(): void {
     const dialogRef = this.dialog.open(AddServiceComponent);
