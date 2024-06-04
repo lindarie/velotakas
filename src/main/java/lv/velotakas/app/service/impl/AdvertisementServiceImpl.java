@@ -47,9 +47,15 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 
     @Override
     public List<AdvertisementResponseDTO> getAdvertisementsByCategory(String category) {
-        return adRepository.findByCategory(category).stream()
-                .map(advertisementMapper::toResponseDto)
-                .collect(Collectors.toList());
+        if (category == null || category.isEmpty()) {
+            return adRepository.findAll().stream()
+                    .map(advertisementMapper::toResponseDto)
+                    .collect(Collectors.toList());
+        } else {
+            return adRepository.findByCategory(category).stream()
+                    .map(advertisementMapper::toResponseDto)
+                    .collect(Collectors.toList());
+        }
     }
 
     @Override

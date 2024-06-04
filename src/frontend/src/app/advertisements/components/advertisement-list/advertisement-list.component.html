@@ -1,10 +1,8 @@
 <h2>{{ category }}</h2>
-<button mat-raised-button color="primary" routerLink="/sludinajumi/jauns">Izvietot sludinājumu</button>
-
 <mat-card>
-  <mat-card-title>Sludinājumi</mat-card-title>
+  <div>{{ totalRecords }} rezultāti</div>
   <mat-card-content>
-    <table mat-table [dataSource]="advertisements" class="mat-elevation-z8">
+    <table mat-table [dataSource]="advertisements" class="mat-elevation-z8" >
       <!-- Fotogrāfija -->
       <ng-container matColumnDef="image">
         <th mat-header-cell *matHeaderCellDef> Fotogrāfija </th>
@@ -31,3 +29,5 @@
     </table>
   </mat-card-content>
 </mat-card>
+
+<button mat-raised-button color="primary" routerLink="/sludinajumi/jauns">Izvietot sludinājumu</button>

@@ -31,8 +31,7 @@ public class AdvertisementController {
 
     @GetMapping
     @Operation(summary = "Retrieve advertisements by category")
-    public ResponseEntity<List<AdvertisementResponseDTO>> getAdvertisements(@RequestParam String category) {
-        if (category == null || category.isEmpty()) return ResponseEntity.notFound().build();
+    public ResponseEntity<List<AdvertisementResponseDTO>> getAdvertisements(@RequestParam(required = false) String category) {
         List<AdvertisementResponseDTO> advertisements = adService.getAdvertisementsByCategory(category);
         return ResponseEntity.ok(advertisements);
     }

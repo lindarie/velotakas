@@ -4,9 +4,8 @@ import {categories} from "../../shared/categories";
 import {AdvertisementsService} from "../../services/advertisements.service";
 import {Advertisement} from "../../shared/advertisement";
 
-
 @Component({
-  selector: 'app-advertisement-by-category',
+  selector: 'app-advertisement-list',
   templateUrl: './advertisement-list.component.html',
   styleUrls: ['./advertisement-list.component.scss']
 })
@@ -17,6 +16,7 @@ export class AdvertisementListComponent implements OnInit {
   categoryUrl: string = '';
   advertisements: Advertisement[] = [];
   displayedColumns: string[] = ['image', 'description', 'price'];
+  totalRecords: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,17 +38,24 @@ export class AdvertisementListComponent implements OnInit {
   }
 
   fetchAdvertisements(): void {
-    if (this.category) {
-      this.adsService.getAdvertisementsByCategory(this.category).subscribe(data => {
-        this.advertisements = data;
-      });
-    }
+    this.adsService.getAdvertisementsByCategory(this.category).subscribe(data => {
+      this.advertisements = data;
+      this.totalRecords = data.length;
+    });
   }
 
   navigateToDetail(advertisement: Advertisement): void {
-    this.router.navigate(['/sludinajumi', this.categoryUrl, advertisement.id]);
+    if (this.categoryUrl != null) {
+      this.router.navigate(['/sludinajumi', this.categoryUrl, advertisement.id]);
+    } else {
+      const categoryObj = this.categoriesList.find(cat => cat.value === advertisement.category);
+      if (categoryObj) {
+        this.router.navigate(['/sludinajumi', categoryObj.url, advertisement.id]);
+      } else {
+        console.error(`Category not found for advertisement: ${advertisement.id}`);
+      }
+    }
   }
-
   getImageUrl(advertisement: Advertisement): string {
     return `/api/files/${advertisement.filePath}`;
   }

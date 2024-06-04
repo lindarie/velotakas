@@ -1,9 +1,11 @@
-<mat-grid-list cols="3" rowHeight="15rem">
-  <mat-grid-tile *ngFor="let category of categories" [routerLink]="['/sludinajumi', category.url]">
-    <div class="category-text" >
-      <a >{{ category.value }}</a>
+<h1>Velobraukšanas sludinājumi</h1>
+<div class="category-list-container">
+  <div class="category-list">
+    <div class="category-item" *ngFor="let category of categories" [routerLink]="['/sludinajumi', category.url]">
+      <img [src]="category.img" alt="{{ category.value }}">
+      <h3>{{ category.value }}</h3>
     </div>
-  </mat-grid-tile>
-</mat-grid-list>
+  </div>
+</div>
+<app-advertisement-list></app-advertisement-list>
 
-<button mat-raised-button color="primary" routerLink="/sludinajumi/jauns">Izvietot sludinājumu</button>
