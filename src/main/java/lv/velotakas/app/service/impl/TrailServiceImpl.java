@@ -1,4 +1,5 @@
 package lv.velotakas.app.service.impl;
+import lombok.RequiredArgsConstructor;
 import lv.velotakas.app.dto.request.trail.TrailDTO;
 import lv.velotakas.app.dto.request.trail.TrailObjectDTO;
 import lv.velotakas.app.dto.request.trail.UpdateTrailRequest;
@@ -17,15 +18,8 @@ import java.util.List;
 
 
 @Service
+@RequiredArgsConstructor
 public class TrailServiceImpl implements TrailService {
-
-    public TrailServiceImpl(TrailRepository trailRepository, TrailMapper trailMapper, UserRepository userRepository, TrailObjectRepository trailObjectRepository, MapObjectRepository objectRepository){
-        this.trailRepository = trailRepository;
-        this.trailMapper = trailMapper;
-        this.userRepository = userRepository;
-        this.trailObjectRepository = trailObjectRepository;
-        this.objectRepository = objectRepository;
-    }
     private final TrailRepository trailRepository;
     private final TrailMapper trailMapper;
     private final UserRepository userRepository;
@@ -36,7 +30,7 @@ public class TrailServiceImpl implements TrailService {
 
     public TrailDTO createTrail(TrailDTO trailDTO){
         Trail trail = trailMapper.toEntity(trailDTO);
-        User user = userRepository.findById(1).orElseThrow(()-> new RuntimeException("User not found"));
+        User user = userRepository.findByEmail(trailDTO.getUserEmail()).orElseThrow(()-> new RuntimeException("User not found"));
         trail.setUser(user);
         Trail savedTrail = trailRepository.save(trail);
         return trailMapper.toDTO(savedTrail);
