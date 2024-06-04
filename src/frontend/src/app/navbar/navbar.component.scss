@@ -7,7 +7,7 @@ nav {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  background-color: #333;
+  background-color: #8c7051;
   padding: 10px;
   align-items: center;
 
@@ -28,9 +28,19 @@ nav {
         color: white;
         text-decoration: none;
         transition: color 0.3s ease;
+        font-size: 1.2em;
+        padding: 10px;
+        background-color: #4b4131;
+        border-radius: 5px;
 
         &:hover {
           color: #ddd;
+          background-color: #675d4d;
+        }
+
+        &.active {
+          color: #ddd;
+          background-color: #675d4d;
         }
       }
     }

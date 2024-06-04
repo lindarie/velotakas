@@ -1,6 +1,7 @@
 .component {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   height: 100vh;
   margin: 0;
@@ -48,8 +49,15 @@ button {
 }
 
 .register {
-  margin-top: 20px; // Adds some space above the register div
-  text-align: center; // Centers the text inside the register div
+  margin-top: 20px;
+  text-align: center;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #dedede;
+  } // Centers the text inside the register div
 
   a {
     color: #4CAF50; // Changes the color of the link
@@ -57,6 +65,29 @@ button {
 
     &:hover {
       color: #45a049; // Changes the color of the link when hovered over
+    }
+  }
+}
+
+.guest{
+  margin-top: 20px;
+  width: 300px;
+  width: 300px;
+  text-align: center;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+
+  &:hover {
+    background-color: #dedede;
+  }
+
+  a {
+    color: #4CAF50;
+    text-decoration: none;
+
+    &:hover {
+      color: #45a049;
     }
   }
 }

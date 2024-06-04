@@ -1,7 +1,8 @@
 <nav>
   <ul>
-    <li><a [routerLink]="['/takas']">Velotakas</a></li>
-    <li><a [routerLink]="['/sludinajumi']">Sludinājumi</a></li>
+    <li><a [routerLink]="['/takas']" [routerLinkActive]="['active']">Velotakas</a></li>
+    <li><a [routerLink]="['/pakalpojumi']" [routerLinkActive]="['active']">Pakalpojumi</a></li>
+    <li><a [routerLink]="['/sludinajumi']" [routerLinkActive]="['active']">Sludinājumi</a></li>
   </ul>
   <div class="log-out" (click)="logout()">
     iziet
