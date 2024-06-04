@@ -1,5 +1,6 @@
 package lv.velotakas.app.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import lv.velotakas.app.dto.request.advertisement.AdvertisementDTO;
 import lv.velotakas.app.dto.request.advertisement.AdvertisementUpdateDTO;
 import lv.velotakas.app.dto.response.advertisement.AdvertisementResponseDTO;
@@ -19,16 +20,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class AdvertisementServiceImpl implements AdvertisementService {
     private final AdvertisementRepository adRepository;
     private final AdvertisementMapper advertisementMapper;
     private final UserRepository userRepository;
-
-    public AdvertisementServiceImpl(AdvertisementRepository adRepository, AdvertisementMapper advertisementMapper, UserRepository userRepository) {
-        this.adRepository = adRepository;
-        this.advertisementMapper = advertisementMapper;
-        this.userRepository = userRepository;
-    }
 
     @Override
     @Transactional

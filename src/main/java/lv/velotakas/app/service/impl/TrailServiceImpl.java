@@ -1,4 +1,5 @@
 package lv.velotakas.app.service.impl;
+import lombok.RequiredArgsConstructor;
 import lv.velotakas.app.dto.request.trail.TrailDTO;
 import lv.velotakas.app.dto.request.trail.UpdateTrailRequest;
 import lv.velotakas.app.mapper.TrailMapper;
@@ -7,7 +8,6 @@ import lv.velotakas.app.models.User;
 import lv.velotakas.app.repositories.TrailRepository;
 import lv.velotakas.app.repositories.UserRepository;
 import lv.velotakas.app.service.TrailService;
-import lv.velotakas.app.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,13 +16,8 @@ import java.util.List;
 
 
 @Service
+@RequiredArgsConstructor
 public class TrailServiceImpl implements TrailService {
-
-    public TrailServiceImpl(TrailRepository trailRepository, TrailMapper trailMapper, UserRepository userRepository, UserService userService){
-        this.trailRepository = trailRepository;
-        this.trailMapper = trailMapper;
-        this.userRepository = userRepository;
-    }
     private final TrailRepository trailRepository;
     private final TrailMapper trailMapper;
     private final UserRepository userRepository;
