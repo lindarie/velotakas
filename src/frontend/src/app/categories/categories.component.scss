@@ -1,0 +1,33 @@
+.component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.categories-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.category-item {
+  margin: 0 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.category-item img {
+  width: 100px;  // Set the width as per your requirement
+  height: 100px; // Set the height as per your requirement
+  object-fit: contain; // This will ensure that the image covers the area without distorting the aspect ratio
+}
+
+.app-advertisement {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

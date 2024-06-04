@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class ApiService {
   private trailList = '/api/trails';
   private bikeService = '/api/service';
+  private advertisement = '/api/ad';
 
   constructor(private http: HttpClient) {}
 
@@ -44,11 +45,28 @@ export class ApiService {
   }
 
   deleteBikeService(id: string): Observable<any> {
-    return this.http.delete<any>(this.bikeService + '/delete/' + id);
+    return this.http.delete<any>(this.bikeService + '/' + id);
   }
 
   serviceDetail(id: string): Observable<any> {
     return this.http.get<any>(this.bikeService + '/' + id);
   }
 
+  getAdvertisements(category: any): Observable<any> {
+    let params = new HttpParams().set('category', category);
+    return this.http.get<any>(this.advertisement, { params: params });
+  }
+
+  submitAdvertisementData(advertisementData: any): Observable<any> {
+    advertisementData.userEmail = JSON.parse(<string>localStorage.getItem('user')).user;
+    return this.http.post<any>('/api/ad/create', advertisementData);
+  }
+
+  getAdvertisementById(id: string): Observable<any> {
+    return this.http.get<any>(this.advertisement + '/' + id);
+  }
+
+  deleteAdvertisement(id: string): Observable<any> {
+    return this.http.delete<any>(this.advertisement + '/' + id);
+  }
 }

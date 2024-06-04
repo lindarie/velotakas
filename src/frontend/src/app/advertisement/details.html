@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Sludinājums</h2>
+@if (advertisementDetail){
+  <mat-dialog-content>
+    <img [src]="getImageUrl(advertisementDetail)" style="height: 150px">
+    <p>Nosaukums: {{ advertisementDetail.description }}</p>
+    <p>Cena: {{ advertisementDetail.price }}</p>
+
+
+    <!-- Add more fields as needed -->
+  </mat-dialog-content>
+<!--  @if (advertisementDetail.user.user === userEmail){-->
+<!--    <mat-dialog-actions>-->
+<!--      <button mat-button (click)="onDeleteClick(advertisementDetail.id)" style="background-color: #d30021; width: 100%; color: white">Dzēst</button>-->
+<!--    </mat-dialog-actions>-->
+<!--  }-->
+
+}
+@if (!advertisementDetail){
+  <mat-dialog-content>
+    <p>Loading...</p>
+  </mat-dialog-content>
+}
+
+
+
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" style="width: 100%">Aizvērt</button>
+</mat-dialog-actions>

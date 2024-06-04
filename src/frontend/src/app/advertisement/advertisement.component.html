@@ -1,0 +1,28 @@
+<div class="component">
+  <div class="bar">
+    <h3>{{category}}</h3>
+      <div class="add-button">
+        <button mat-raised-button color="primary" (click)="openAddDialog()">Pievienot sludinājumu</button>
+      </div>
+  </div>
+  <table class="advertisements-list">
+    <thead class="advertisements-header">
+      <tr>
+        <th class="ad-image">Image</th>
+        <th class="ad-description">Description</th>
+        <th class="ad-price">Price</th>
+        <!-- Add more headers as necessary -->
+      </tr>
+    </thead>
+    <tbody>
+    @for (ad of advertisements; track ad.id){
+      <tr (click)="openDetailsDialog(ad)">
+        <img [src]="getImageUrl(ad)" alt="Advertisement Image" class="ad-image">
+        <td class="ad-description">{{ ad.description }}</td>
+        <td class="ad-price">{{ ad.price }}</td>
+        <!-- Add more fields as necessary -->
+      </tr>
+    }
+    </tbody>
+  </table>
+</div>

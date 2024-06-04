@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>Pievienot jaunu sludinājumu</h2>
+<mat-dialog-content>
+  <form class="advertisement-form" [formGroup]="adsForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column">
+
+    <!-- Kategorija -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Kategorija</mat-label>
+      <mat-select formControlName="category">
+        <mat-option *ngFor="let category of categories" [value]="category.value">
+          {{ category.value }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="adsForm.controls.category.hasError('required')">Kategorija ir obligāta</mat-error>
+    </mat-form-field>
+
+    <!-- Apraksts -->
+    <mat-form-field class="example-full-width" hintLabel="Max 500 rakstzīmes">
+      <mat-label>Apraksts</mat-label>
+      <textarea matInput #input maxlength="500" formControlName="description" placeholder="Tiek pārdots.."></textarea>
+      <mat-hint align="end">{{input.value.length}}/500</mat-hint>
+      <mat-error *ngIf="adsForm.controls.description.hasError('required')">Apraksts ir obligāts</mat-error>
+    </mat-form-field>
+
+    <!-- Cena -->
+    <mat-form-field floatLabel="always" class="example-full-width">
+      <mat-label>Cena</mat-label>
+      <input matInput type="number" step="0.01" class="example-right-align" formControlName="price" placeholder="0.00">
+      <span matTextPrefix>€&nbsp;</span>
+      <mat-error *ngIf="adsForm.controls.price.hasError('required')">Cena ir obligāta</mat-error>
+      <mat-error *ngIf="adsForm.controls.price.hasError('min')">Cenai jābūt vismaz 0.01</mat-error>
+      <mat-error *ngIf="adsForm.controls.price.hasError('max')">Cenai jābūt zem 100 000</mat-error>
+    </mat-form-field>
+
+    <!-- Fotogrāfija -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Fotogrāfija</mat-label>
+      <ngx-mat-file-input formControlName="file" accept=".jpg,.jpeg,.png"></ngx-mat-file-input>
+      <mat-icon matSuffix>attach_file</mat-icon>
+      <mat-error *ngIf="adsForm.controls.file.invalid && adsForm.controls.file.touched">
+        Atļautie failu tipi: JPG, JPEG, PNG
+      </mat-error>
+      <mat-error *ngIf="adsForm.controls.file.hasError('required')">Fotogrāfija ir obligāta</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions style="justify-content: flex-end">
+  <button mat-button (click)="onNoClick()">Atcelt</button>
+  <button mat-button (click)="onSubmit()" [disabled]="!adsForm.valid">Pievienot</button>
+</mat-dialog-actions>
