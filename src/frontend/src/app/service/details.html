@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Service Details</h2>
+<mat-dialog-content>
+  <p>Name: {{ serviceDetail.name }}</p>
+  <p>Comment: {{ serviceDetail.comment }}</p>
+  <p>File Path: {{ serviceDetail.filePath }}</p>
+  <p>User Email: {{ serviceDetail.user.user }}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Close</button>
+</mat-dialog-actions>

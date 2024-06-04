@@ -1,26 +1,34 @@
-<h2 mat-dialog-title>Add Trail</h2>
-<form [formGroup]="trailForm" (ngSubmit)="addTrail()">
-  <mat-dialog-content>
+<h2 mat-dialog-title>Pievienot taku</h2>
+<form [formGroup]="trailForm" (ngSubmit)="addTrail()" style="display: flex; flex-direction: column" >
+  <mat-dialog-content style="flex-direction: column; display: flex">
     <mat-form-field>
-      <mat-label>Name</mat-label>
+      <mat-label>Nosaukums</mat-label>
       <input matInput formControlName="name">
     </mat-form-field>
+<mat-form-field>
+  <mat-label>Virsmas veids</mat-label>
+  <mat-select formControlName="surface">
+    <mat-option value="Asfalts">Asfalts</mat-option>
+    <mat-option value="Grants">Grants</mat-option>
+    <mat-option value="Zeme">Zeme</mat-option>
+    <mat-option value="Taka">Taka</mat-option>
+    <mat-option value="Smiltis">Smiltis</mat-option>
+    <mat-option value="Jaukts">Jaukts</mat-option>
+    <mat-option value="Cits">Cits</mat-option>
+  </mat-select>
+</mat-form-field>
     <mat-form-field>
-      <mat-label>Surface</mat-label>
-      <input matInput formControlName="surface">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Complexity</mat-label>
+      <mat-label>Sarežģītība (1-10)</mat-label>
       <input matInput formControlName="complexity">
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Comment</mat-label>
+      <mat-label>Apraksts</mat-label>
       <input matInput formControlName="comment">
     </mat-form-field>
     <!-- Add more form fields as needed -->
   </mat-dialog-content>
-  <mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button type="submit">Add</button>
+  <mat-dialog-actions style="justify-content: space-between">
+    <button mat-button (click)="onNoClick()">Atcelt</button>
+    <button mat-button type="submit">Pievienot</button>
   </mat-dialog-actions>
 </form>

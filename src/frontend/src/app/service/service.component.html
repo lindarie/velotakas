@@ -1,0 +1,35 @@
+<div class="component">
+  @if (!services){
+    <div class="loading">
+      <mat-spinner diameter="100" style="margin-top: 40px"></mat-spinner>
+    </div>
+  }
+  @if (services && services.length === 0){
+    <p>No services found</p>
+  }
+  @if (services && services.length > 0){
+    <div class="bar">
+      <h2 class="component-title">Pakalpojumi</h2>
+      <div class="add-button">
+        <button mat-raised-button color="primary"  (click)="openAddServiceDialog()">Pievienot pakalpojumu</button>
+      </div>
+    </div>
+    <table class="services-list">
+      <thead>
+        <tr class="services-header">
+          <th class="service-name">Nosaukums</th>
+          <th class="service-description">Apraksts</th>
+
+        </tr>
+      </thead>
+      <tbody>
+      @for (service of services; track service.id){
+        <tr (click)="openServiceDetailDialog(service)">
+          <td class="service-name">{{ service.name }}</td>
+          <td class="service-description">{{ service.comment }}</td>
+        </tr>
+      }
+      </tbody>
+    </table>
+  }
+</div>

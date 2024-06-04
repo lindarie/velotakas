@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
   private trailList = '/api/trails';
+  private bikeService = '/api/service';
 
   constructor(private http: HttpClient) {}
 
@@ -25,6 +26,22 @@ export class ApiService {
 
   deleteTrail(id: string): Observable<any> {
     return this.http.delete<any>(this.trailList + '/delete/' +  id);
+  }
+
+  getBikeService(): Observable<any> {
+    return this.http.get<any>(this.bikeService);
+  }
+
+  createBikeService(service: any): Observable<any> {
+    return this.http.post<any>(this.bikeService + '/create', service);
+  }
+
+  deleteBikeService(id: string): Observable<any> {
+    return this.http.delete<any>(this.bikeService + '/delete/' + id);
+  }
+
+  serviceDetail(id: string): Observable<any> {
+    return this.http.get<any>(this.bikeService + '/' + id);
   }
 
 }

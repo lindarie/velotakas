@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Add Service</h2>
+<mat-dialog-content>
+  <form [formGroup]="serviveForm" style="display: flex; flex-direction: column">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Comment</mat-label>
+      <textarea matInput formControlName="comment"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>File Path</mat-label>
+      <input matInput formControlName="filePath">
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions style="justify-content: flex-end">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="addService()" [disabled]="!serviveForm.valid">Add Service</button>
+</mat-dialog-actions>

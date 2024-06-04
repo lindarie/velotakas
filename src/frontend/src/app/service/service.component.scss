@@ -5,7 +5,6 @@
   justify-content: center;
   margin: 0;
   padding: 20px;
-
 }
 
 .bar{
@@ -34,35 +33,32 @@
   }
 }
 
-.trails-list {
-  margin: 20px 0;
+.services-list {
+  margin-top: 20px;
   padding: 20px;
   width: 800px;
   background-color: #f4f4f4;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-collapse: collapse;
-
-
 }
 
-.trails-header {
+.services-header {
   background-color: #8c7051;
   color: #f4f4f4;
   font-weight: bold;
 
-  .trail-name,
-  .trail-surface,
-  .trail-complexity {
+  .service-name,
+  .service-description,
+  .service-price {
     padding: 15px;
     text-align: center;
     font-size: 1.2em;
     color: #f4f4f4;
   }
-
 }
 
-.trails-header th {
+.services-header th {
   padding: 15px;
   text-align: center;
 }
@@ -75,9 +71,9 @@ tr:nth-child(even) {
   background-color: #ddd;
 }
 
-.trail-name,
-.trail-surface,
-.trail-complexity {
+.service-name,
+.service-description,
+.service-price {
   padding: 15px;
   text-align: center;
   font-size: 1.2em;

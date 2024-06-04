@@ -160,6 +160,7 @@ export class AddTrailDialog {
     surface: new FormControl(''),
     complexity: new FormControl(''),
     comment: new FormControl(''),
+    userEmail: new FormControl(''),
     // Add more form controls as needed
   });
 
@@ -167,7 +168,17 @@ export class AddTrailDialog {
   constructor(
     public dialogRef: MatDialogRef<AddTrailDialog>,
     private apiService: ApiService
-  ) {}
+  ) {
+    // @ts-ignore
+    let user = localStorage.getItem('user');
+    if (user) {
+      // @ts-ignore
+      let parsedUser = JSON.parse(user);
+      if (parsedUser && parsedUser.user) {
+        this.trailForm.controls['userEmail'].setValue(parsedUser.user);
+      }
+    }
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
