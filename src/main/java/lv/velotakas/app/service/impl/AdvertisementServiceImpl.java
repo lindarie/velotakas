@@ -1,6 +1,7 @@
 package lv.velotakas.app.service.impl;
 
 import lv.velotakas.app.dto.request.advertisement.AdvertisementDTO;
+import lv.velotakas.app.dto.request.advertisement.AdvertisementUpdateDTO;
 import lv.velotakas.app.dto.response.advertisement.AdvertisementResponseDTO;
 import lv.velotakas.app.mapper.AdvertisementMapper;
 import lv.velotakas.app.models.Advertisement;
@@ -9,6 +10,7 @@ import lv.velotakas.app.repositories.AdvertisementRepository;
 import lv.velotakas.app.repositories.UserRepository;
 import lv.velotakas.app.service.AdvertisementService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -29,6 +31,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     }
 
     @Override
+    @Transactional
     public AdvertisementDTO createAdvertisement(AdvertisementDTO advertisementDTO) {
         Advertisement advertisement = advertisementMapper.toEntity(advertisementDTO);
         User user = userRepository.findByEmail(advertisementDTO.getUserEmail()).orElseThrow(() -> new RuntimeException("User not found"));
@@ -39,6 +42,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<AdvertisementDTO> getAllAdvertisements() {
         return adRepository.findAll().stream()
                 .map(advertisementMapper::toDto)
@@ -46,6 +50,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<AdvertisementResponseDTO> getAdvertisementsByCategory(String category) {
         if (category == null || category.isEmpty()) {
             return adRepository.findAll().stream()
@@ -59,8 +64,28 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public AdvertisementResponseDTO getAdvertisementById(Integer id) {
         Optional<Advertisement> advertisementOptional = adRepository.findById(id);
         return advertisementOptional.map(advertisementMapper::toResponseDto).orElse(null);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean advertisementExistsById(Integer id) {
+        return adRepository.existsById(id);
+    }
+
+    @Override
+    @Transactional
+    public void updateAdvertisement(AdvertisementUpdateDTO updateRequest, Integer id) {
+        Advertisement advertisement = adRepository.findById(id).orElseThrow(() -> new RuntimeException("Advertisement not found"));
+        advertisementMapper.updateAdvertisement(updateRequest, advertisement);
+    }
+
+    @Override
+    @Transactional
+    public void deleteAdvertisementById(Integer id) {
+        adRepository.deleteById(id);
     }
 }
