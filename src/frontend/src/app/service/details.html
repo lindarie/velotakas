@@ -1,10 +1,10 @@
-<h2 mat-dialog-title>Service Details</h2>
+<h2 mat-dialog-title>Pakalpojuma informācija</h2>
 <mat-dialog-content>
-  <p>Name: {{ serviceDetail.name }}</p>
-  <p>Comment: {{ serviceDetail.comment }}</p>
-  <p>File Path: {{ serviceDetail.filePath }}</p>
-  <p>User Email: {{ serviceDetail.user.user }}</p>
+  <img [src]="getImageUrl(serviceDetail)" alt="Service Image" height="100">
+  <p>Serviss: {{ serviceDetail.name }}</p>
+  <p>Apraksts: {{ serviceDetail.comment }}</p>
+  <p>Kontaktpersona: {{ serviceDetail.user.email }}</p>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Close</button>
+  <button mat-button (click)="onNoClick()" style="width: 100%">aizvērt</button>
 </mat-dialog-actions>

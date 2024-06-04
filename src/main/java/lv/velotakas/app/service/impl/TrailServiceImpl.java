@@ -1,10 +1,12 @@
 package lv.velotakas.app.service.impl;
 import lombok.RequiredArgsConstructor;
 import lv.velotakas.app.dto.request.trail.TrailDTO;
+import lv.velotakas.app.dto.request.trail.TrailObjectDTO;
 import lv.velotakas.app.dto.request.trail.UpdateTrailRequest;
 import lv.velotakas.app.mapper.TrailMapper;
-import lv.velotakas.app.models.Trail;
-import lv.velotakas.app.models.User;
+import lv.velotakas.app.models.*;
+import lv.velotakas.app.repositories.TrailObjectRepository;
+import lv.velotakas.app.repositories.MapObjectRepository;
 import lv.velotakas.app.repositories.TrailRepository;
 import lv.velotakas.app.repositories.UserRepository;
 import lv.velotakas.app.service.TrailService;
@@ -21,6 +23,10 @@ public class TrailServiceImpl implements TrailService {
     private final TrailRepository trailRepository;
     private final TrailMapper trailMapper;
     private final UserRepository userRepository;
+
+    private final TrailObjectRepository trailObjectRepository;
+
+    private final MapObjectRepository objectRepository;
 
     public TrailDTO createTrail(TrailDTO trailDTO){
         Trail trail = trailMapper.toEntity(trailDTO);
@@ -58,6 +64,28 @@ public class TrailServiceImpl implements TrailService {
     @Transactional(readOnly = true)
     public List<TrailDTO> findAllTrails(){
         return trailRepository.findAll().stream().map(trailMapper::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<TrailDTO> getTrailsBySurface(String surface) {
+        return trailRepository.findBySurface(surface).stream().map(trailMapper::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public TrailObjectDTO addObject(Integer objectId, Integer trailId){
+        Trail trail = trailRepository.findById(trailId).orElseThrow();
+        MapObject object = objectRepository.findById(objectId).orElseThrow();
+        TrailObject trailObject = new TrailObject();
+
+        TrailObjectId trailObjectId = new TrailObjectId(trailId, objectId);
+        trailObject.setId(trailObjectId);
+        trailObject.setTrail(trail);
+        trailObject.setMapObject(object);
+
+        trailObject = trailObjectRepository.save(trailObject);
+        return trailMapper.toTrailObjectDTO(trailObject);
     }
 
 }

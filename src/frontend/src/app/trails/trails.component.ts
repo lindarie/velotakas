@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from "@angular/forms";
+import {FormsModule, FormGroup, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import { ApiService } from '../services/api.service';
 import  { MaterialModule } from "../material/material.module";
 import  { MatDialog,
@@ -80,6 +80,7 @@ export class TrailsComponent implements OnInit{
 
 import { TrailService} from "../services/trails.service";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'dialog-overview-example-dialog',
@@ -152,15 +153,16 @@ export class DialogOverviewExampleDialog {
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
-    MatDialogClose,],
+    MatDialogClose,
+    CommonModule],
 })
 export class AddTrailDialog {
   trailForm = new FormGroup({
-    name: new FormControl(''),
-    surface: new FormControl(''),
-    complexity: new FormControl(''),
-    comment: new FormControl(''),
-    userEmail: new FormControl(''),
+    name: new FormControl('',[Validators.required, Validators.maxLength(300)]),
+    surface: new FormControl('',Validators.required),
+    complexity: new FormControl('', [Validators.required, Validators.min(1), Validators.max(10)]),
+    comment: new FormControl('',[Validators.required, Validators.maxLength(300)]),
+    userEmail: new FormControl('',Validators.required),
     // Add more form controls as needed
   });
 

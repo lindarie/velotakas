@@ -1,6 +1,5 @@
 package lv.velotakas.app.controller;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.validation.Valid;
 import lv.velotakas.app.dto.request.object.UpdateObjectRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +16,6 @@ public class ObjectController {
     private final ObjectService objectService;
 
     public ObjectController(ObjectService objectService) { this.objectService = objectService; }
-
-    @PostMapping("/createObject")
-    @Operation(summary = "Create an object for trail")
-
-    public ResponseEntity<ObjectDTO> createObject(@RequestBody @Valid ObjectDTO objectDTO) {
-
-        return ResponseEntity.ok(objectService.createObject(objectDTO));
-
-    }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get information about an object")
