@@ -24,12 +24,10 @@ public class ObjectServiceImpl implements ObjectService {
     private final UserRepository userRepository;
 
     public ObjectDTO createObject(ObjectDTO objectDTO) {
-        System.out.println("call1");
         MapObject object = objectMapper.toEntity(objectDTO);
         User user = userRepository.findById(1).orElseThrow(()-> new RuntimeException("User not found"));
         object.setUser(user);
         MapObject savedObject = objectRepository.save(object);
-        System.out.println(savedObject.getId());
         return objectMapper.toDTO(savedObject);
     }
     @Override
