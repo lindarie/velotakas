@@ -32,8 +32,15 @@ export class ApiService {
     return this.http.get<any>(this.bikeService);
   }
 
-  createBikeService(service: any): Observable<any> {
-    return this.http.post<any>(this.bikeService + '/create', service);
+  uploadFile(file: File): Observable<any> {
+    const formData = new FormData();
+    const uniqueFileName = `${Date.now()}-${file.name}`;
+    formData.append('file', file, uniqueFileName);
+    return this.http.post('/api/files/upload', formData);
+  }
+
+  createBikeService(serviceData: any): Observable<any> {
+    return this.http.post<any>(this.bikeService + '/create', serviceData);
   }
 
   deleteBikeService(id: string): Observable<any> {

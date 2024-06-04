@@ -26,7 +26,7 @@
       @for (service of services; track service.id){
         <tr (click)="openServiceDetailDialog(service)">
           <td class="service-name">{{ service.name }}</td>
-          <td class="service-description">{{ service.comment }}</td>
+          <td class="service-description">{{ getShortComment(service.comment) }}</td>
         </tr>
       }
       </tbody>

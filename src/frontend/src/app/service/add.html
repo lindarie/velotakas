@@ -1,25 +1,31 @@
-<h2 mat-dialog-title>Add Service</h2>
+<h2 mat-dialog-title>Pievienot jaunu pakalpojumu</h2>
 <mat-dialog-content>
-  <form [formGroup]="serviveForm" style="display: flex; flex-direction: column">
+  <form [formGroup]="serviceForm" style="display: flex; flex-direction: column">
     <mat-form-field>
-      <mat-label>Name</mat-label>
+      <mat-label>Nosaukums</mat-label>
       <input matInput formControlName="name">
+      <mat-error *ngIf="serviceForm.controls.name.hasError('required')">Nosaukums ir obligāts</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" hintLabel="Max 300 rakstzīmes">
+      <mat-label>Apraksts</mat-label>
+      <textarea matInput #input maxlength="300" formControlName="comment" placeholder="Serviss piedāvā.."></textarea>
+      <mat-hint align="end">{{input.value.length}}/300</mat-hint>
+      <mat-error *ngIf="serviceForm.controls.comment.hasError('required')">Apraksts ir obligāts</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Comment</mat-label>
-      <textarea matInput formControlName="comment"></textarea>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>File Path</mat-label>
-      <input matInput formControlName="filePath">
+      <mat-label>Fotogrāfija</mat-label>
+      <ngx-mat-file-input formControlName="file" accept=".jpg,.jpeg,.png"></ngx-mat-file-input>
+      <mat-icon matSuffix>attach_file</mat-icon>
+      <mat-error *ngIf="serviceForm.controls.file.invalid && serviceForm.controls.file.touched">Atļautie failu tipi: JPG, JPEG, PNG</mat-error>
+      <mat-error *ngIf="serviceForm.controls.file.hasError('required')">Fotogrāfija ir obligāta</mat-error>
     </mat-form-field>
 
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions style="justify-content: flex-end">
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button (click)="addService()" [disabled]="!serviveForm.valid">Add Service</button>
+  <button mat-button (click)="onNoClick()">Atcelt</button>
+  <button mat-button (click)="addService()" [disabled]="!serviceForm.valid">Pievienot</button>
 </mat-dialog-actions>
